@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+import datetime, getpass, codecs
+path='/home/' + getpass.getuser() + '/.local/share/fish/fish_history'
+with open(path, encoding="latin-1") as hdata:
+    cmd=''
+    when=''
+    for l in hdata:
+        line = l.strip()
+        if line.startswith('- cmd:'):
+            cmd = line.replace('- cmd: ','')
+        elif line.startswith('when:'):
+            when = line.replace('when: ','')
+            when = datetime.datetime.fromtimestamp(int(when)).strftime('%Y-%m-%d %H:%M:%S')
+            print(when + ": " + cmd)

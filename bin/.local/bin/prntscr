@@ -1,0 +1,14 @@
+#!/bin/bash
+if [[ ! -d ~/Pictures/Screenshots ]]; then
+    mkdir -p ~/Pictures/Screenshots
+fi
+if [ $# -eq 0 ]; then
+    scrot '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && xclip -selection clipboard -t image/png ~/Pictures/Screenshots/$f'
+else
+    if [ "$1" == "-s" ]; then
+        scrot -s '%Y-%m-%d_%H:%M:%S_$wx$h.png' -e 'mv $f ~/Pictures/Screenshots/ && xclip -selection clipboard -t image/png ~/Pictures/Screenshots/$f'
+    else
+        echo "Error, unexpected argument: $*"
+        exit 1
+    fi
+fi

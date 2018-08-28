@@ -1,0 +1,82 @@
+URxvt*font              : xft:DejaVu Sans Mono:pixelsize=20
+URxvt*borderLess        : false
+URxvt*externalBorder    : 0
+URxvt*internalBorder    : 0
+
+URxvt*iconFile          : /usr/share/icons/gnome/256x256/apps/gnome-terminal.png
+
+URxvt.keysym.C-Tab      : \033[27;5;9~
+URxvt.keysym.Control-Shift-ISO_Left_Tab: \033[27;6;9~
+
+! disable ctrl-shift
+URxvt*iso14755          : False 
+URxvt*iso14755_52       : False
+
+URxvt.keysym.Shift-Up   : command:\033]720;1\007
+URxvt.keysym.Shift-Down : command:\033]721;1\007
+
+!
+! scrollbar
+!
+! scrollbar width
+URxvt*thickness         : 5
+! scrollbar color
+URxvt*scrollColor       : #434343
+! scrollbar trough area color
+URxvt*troughColor       : #1C1D1E
+! scrollbar without a trough
+URxvt*scrollBar_floating: false
+! scrollbar to the right
+URxvt*scrollBar_right   : true
+! scrollbar style
+URxvt*scrollstyle       : plain
+! scrollbar disable
+URxvt*scrollBar         : false
+
+URxvt*scrollTtyOutput   : false
+URxvt*scrollWithBuffer  : true
+URxvt*scrollTtyKeypress : true
+
+URxvt*depth             : 32
+!URxvt*background        : rgba:0000/0000/0200/c800
+
+URxvt*cursorBlink       : false
+URxvt*inheritPixmap     : false
+URxvt*saveLines         : 2000
+
+! Molokai theme
+URxvt*background        : #1C1D1E
+URxvt*foreground        : #F8F8F2
+URxvt*cursorColor       : #F8F8F2
+! Black         0;30
+URxvt*color0            : #1B1D1E
+! Red           0;31
+URxvt*color1            : #B60050
+! Green         0;32
+URxvt*color2            : #88BB22
+! Brown         0;33
+URxvt*color3            : #C47F2C
+! Blue          0;34
+URxvt*color4            : #30309B
+! Purple        0;35
+URxvt*color5            : #7E40A5
+! Cyan          0;36
+URxvt*color6            : #4699AF
+! Light Gray    0;37
+URxvt*color7            : #9999AA
+! Dark Gray     1;30
+URxvt*color8            : #303030
+! Light Red     1;31
+URxvt*color9            : #F92672
+! Light Green   1;32
+URxvt*color10           : #80FF00
+! Yellow        1;33
+URxvt*color11           : #FFBA68
+! Light Blue    1;34
+URxvt*color12           : #7070F0
+! Light Purple  1;35
+URxvt*color13           : #BB88DD
+! Light Cyan    1;36
+URxvt*color14           : #66D9EF
+! White         1;37
+URxvt*color15           : #F8F8F2

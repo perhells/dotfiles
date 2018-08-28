@@ -1,0 +1,3 @@
+#!/bin/bash
+markdown-pdf "$@" -o "$@".pdf 2> /dev/null;
+$(newworkspace zathura "$@".pdf 2> /dev/null; rm "$@".pdf) &

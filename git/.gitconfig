@@ -1,0 +1,30 @@
+[push]
+    default = simple
+[diff]
+    tool = vimdiff
+[color]
+    ui = always
+    branch = always
+    diff = always
+    interactive = always
+    status = always
+    grep = always
+    pager = true
+    decorate = always
+    showbranch = always
+[color "status"]
+    added = green
+    changed = red bold
+    untracked = magenta bold
+[color "branch"]
+    remote = yellow
+[branch]
+    autosetuprebase = always
+[alias]
+    wdiff = diff --color-words
+    wshow = show --color-words
+    lg = log --oneline --decorate --color --graph
+[merge]
+    conflictstyle = diff3
+[mergetool]
+    prompt = false

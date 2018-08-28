@@ -1,0 +1,8 @@
+#!/bin/sh
+OLD_WORKSPACE=$(i3-msg -t get_workspaces | tr , '\n' | grep -B 2 '"focused":true' | grep name | sed -s "s/\"name\":\"//" | sed -s "s/\"//")
+NEW_WORKSPACE=$(($(i3-msg -t get_workspaces | tr , '\n' | grep '"num":' | cut -d : -f 2 | sort -rn | head -1) + 1))
+i3-msg workspace $NEW_WORKSPACE > /dev/null
+if [ "$#" -gt 0 ]; then
+    eval "$@"
+    i3-msg workspace $OLD_WORKSPACE > /dev/null
+fi
