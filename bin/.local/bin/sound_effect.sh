@@ -3,8 +3,9 @@
 # Set cwd to script path
 cd "${0%/*}"
 
-count=$(ls Soundeffects/*.mp3 | wc -l)
+sounds=$(find "Soundeffects/" -name "*.mp3" -or -name "*.wav")
+count=$(echo "$sounds" | wc -l)
 num=$(( ( RANDOM % count ) + 1 ))
-sound=$(ls Soundeffects/*.mp3 | tail -n "$num"  | head -n 1)
+sound=$(echo "$sounds" | tail -n "$num"  | head -n 1)
 
 mplayer "$sound"
