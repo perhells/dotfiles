@@ -14,11 +14,6 @@ Plug 'mxw/vim-jsx'
 Plug 'mhinz/vim-startify'
 call plug#end()
 
-if $TERM == "xterm"
-    set t_Co=256
-    let g:molokai_original = 1
-endif
-
 syntax on
 filetype plugin indent on
 

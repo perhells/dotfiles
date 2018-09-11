@@ -233,6 +233,7 @@ bar {
     }
 }
 
+for_window [class="net-runelite-launcher-Launcher"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
