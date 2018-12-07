@@ -1,17 +1,21 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'matthewsimo/angular-vim-snippets'
-Plug 'luochen1990/indent-detector.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'vim-syntastic/syntastic'
-Plug 'leafgarland/typescript-vim'
+Plug 'bogado/file-line'
+Plug 'bohlender/vim-smt2'
 Plug 'burnettk/vim-angular'
 Plug 'flazz/vim-colorschemes'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'itchyny/lightline.vim'
+Plug 'jceb/vim-orgmode'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'leafgarland/typescript-vim'
+Plug 'luochen1990/indent-detector.vim'
+Plug 'matthewsimo/angular-vim-snippets'
 Plug 'mhinz/vim-startify'
+Plug 'mxw/vim-jsx'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-syntastic/syntastic'
+Plug 'wannesm/wmnusmv.vim'
 call plug#end()
 
 syntax on
@@ -22,6 +26,7 @@ autocmd BufRead *.py set nocindent
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
 autocmd FileType markdown set wrap|set linebreak
+autocmd FileType org set wrap|set linebreak
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
@@ -118,8 +123,7 @@ au BufRead *.py nmap <F7> :w !clear & python<CR>
 "au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 au Bufread *.md nmap <F7> :w<CR>:silent !grip --quiet --export %<CR>:redraw!<CR>
 
-let g:nerdtree_tabs_open_on_console_startup=1
-let g:nerdtree_tabs_smart_startup_focus=2
+let g:nerdtree_tabs_open_on_console_startup=2
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -130,20 +134,6 @@ map <silent> <C-o> :NERDTreeTabsToggle<CR>
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
-
-function! s:CloseIfOnlyControlWinLeft()
-    if winnr("$") != 1
-        return
-    endif
-    if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
-        \ || &buftype == "quickfix"
-    q
-    endif
-endfunction
-augroup CloseIfOnlyControlWinLeft
-    au!
-    au BufEnter * call s:CloseIfOnlyControlWinLeft()
-augroup END
 
 " Simple tab switching
 map <Esc>[27;5;9~ <C-Tab>

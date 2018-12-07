@@ -108,7 +108,8 @@ bindsym $mod+w layout tabbed
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
+bindsym $mod+space exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
 
 # focus the parent container
 #bindsym $mod+a focus parent
@@ -192,46 +193,47 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-bar {
-    status_command i3status
-    i3bar_command i3bar
-    #i3bar_command i3bar -t
-    #i3bar_command ~/.i3/lemonbar/i3_lemonbar.py
-    position top
-    font pango:DejaVu Sans Mono, Icons 10
-    tray_output primary
-    output primary
+#bar {
+#    status_command i3status
+#    i3bar_command i3bar
+#    #i3bar_command i3bar -t
+#    #i3bar_command ~/.i3/lemonbar/i3_lemonbar.py
+#    position top
+#    font pango:DejaVu Sans Mono, Icons 10
+#    tray_output primary
+#    #output
+#
+#    colors {
+#        background #000002c8
+#        statusline #00A5FF #that neon blue
+#        separator #666666
+#
+#        focused_workspace  #666666 #666666 #ffffff
+#        active_workspace   #555555 #555555 #ffffff
+#        inactive_workspace #333333 #333333 #888888
+#        urgent_workspace   #333333 #900000 #ffffff
+#    }
+#}
 
-    colors {
-        background #000002c8
-        statusline #00A5FF #that neon blue
-        separator #666666
-
-        focused_workspace  #666666 #666666 #ffffff
-        active_workspace   #555555 #555555 #ffffff
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace   #333333 #900000 #ffffff
-    }
-}
-
-bar {
-    position top
-    font pango:DejaVu Sans Mono, Icons 10
-    output VIRTUAL1
-    tray_output none
-
-    colors {
-        background #262626
-        statusline #00A5FF #that neon blue
-        separator #666666
-
-        focused_workspace  #666666 #666666 #ffffff
-        active_workspace   #555555 #555555 #ffffff
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace   #333333 #900000 #ffffff
-    }
-}
+#bar {
+#    position top
+#    font pango:DejaVu Sans Mono, Icons 10
+#    output VIRTUAL1
+#    tray_output none
+#
+#    colors {
+#        background #262626
+#        statusline #00A5FF #that neon blue
+#        separator #666666
+#
+#        focused_workspace  #666666 #666666 #ffffff
+#        active_workspace   #555555 #555555 #ffffff
+#        inactive_workspace #333333 #333333 #888888
+#        urgent_workspace   #333333 #900000 #ffffff
+#    }
+#}
 
 for_window [class="net-runelite-launcher-Launcher"] floating enable
 for_window [class="Solaar"] floating enable
@@ -291,11 +293,11 @@ bindsym F13 exec --no-startup-id ~/.local/bin/sound_effect.sh
 #exec --no-startup-id dropbox
 
 # Start Spotify and Slack on correct workspaces
-for_window [class="Spotify"] move to workspace number 1
-for_window [class="Slack"] move to workspace number 3
-exec --no-startup-id spotify
-exec --no-startup-id slack
+#for_window [class="Spotify"] move to workspace number 1
+#for_window [class="Slack"] move to workspace number 3
+#exec --no-startup-id spotify
+#exec --no-startup-id slack
 
 # Initial workspace
-exec --no-startup-id i3-msg 'workspace number 2'
-exec --no-startup-id google-chrome
+#exec --no-startup-id i3-msg 'workspace number 2'
+#exec --no-startup-id google-chrome

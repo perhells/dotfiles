@@ -18,6 +18,8 @@ function so; git $argv; end
 # Connection
 function ssh; export TERM='xterm-256color'; command ssh $argv; export TERM='rxvt-unicode-256color'; end
 
+function ssh-agent; eval (command ssh-agent -c); end
+
 # Comfort
 function ..; cd ..; end
 function ls; command ls -lh --group-directories-first --color $argv; end
@@ -30,8 +32,8 @@ function geet; command git $argv; end
 function dots; command dot "$argv" -Tpng -o "$argv".png; feh "$argv".png; end
 
 # Shows sizes of directories
-function sizes; du -hs * 2> /dev/null | sort -h; end
-function ssizes; sudo du -hs * 2> /dev/null | sort -h; end
+function sizes; du -sch * 2> /dev/null | sort -h; end
+function ssizes; sudo du -sch * 2> /dev/null | sort -h; end
 
 # Opens PDF file on new workspace
 function pdf; newworkspace zathura $argv &; end

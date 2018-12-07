@@ -1,3 +1,5 @@
+URxvt.perl-ext-common: ...,font-size
+
 URxvt*font              : xft:DejaVu Sans Mono:pixelsize=20
 URxvt*borderLess        : false
 URxvt*externalBorder    : 0
