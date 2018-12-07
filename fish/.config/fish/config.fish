@@ -14,7 +14,9 @@ set NuSMV_BIN "$HOME/NuSMV-2.6.0-Linux/bin"
 test -d "$NuSMV_BIN"; and set PATH $PATH $NuSMV_BIN
 
 # Add opam to path
-eval (opam env)
+if type -q opam
+    eval (opam env)
+end
 
 # Auto completion for aws-cli
 test -x (which aws_completer); and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
