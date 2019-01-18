@@ -26,7 +26,8 @@ set $alt Mod1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 10
+#font pango:DejaVu Sans Mono 10
+font pango:Office Code Pro Medium 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -57,15 +58,17 @@ bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
-bindsym $mod+space exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
+#bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
+#bindsym $mod+space exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
+bindsym $mod+d exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
+bindsym $mod+space exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
+bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
 bindsym $mod+e exec --no-startup-id nautilus
-bindsym $mod+g exec --no-startup-id google-chrome-unstable
 
 # change focus
 #bindsym $mod+j focus left
