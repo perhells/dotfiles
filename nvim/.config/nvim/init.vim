@@ -16,6 +16,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-syntastic/syntastic'
 Plug 'wannesm/wmnusmv.vim'
+Plug 'chrisbra/Colorizer'
+Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 
 syntax on
@@ -37,6 +39,7 @@ set expandtab
 set smartindent
 set smarttab
 set shiftwidth=4
+set tabstop=4
 set nowrap
 set number
 set backspace=2
@@ -58,10 +61,19 @@ set hidden		    " Hide buffers when they are abandoned
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
+" Change width of split
+noremap <A-h> <C-w>5<
+noremap <A-j> <C-w>5+
+noremap <A-k> <C-w>5-
+noremap <A-l> <C-w>5>
+noremap <A-left> <C-w>5<
+noremap <A-down> <C-w>5+
+noremap <A-up> <C-w>5-
+noremap <A-right> <C-w>5>
+
 set lazyredraw
 set title
 set autoread
-"set confirm
 set noswapfile
 
 " Jump to the last position when reopening a file
