@@ -17,24 +17,28 @@
 ;==========================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
 background = #222
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
 foreground = #DFDFDF
 foreground-alt = #888
 primary = #0A84FF
 secondary = #E60053
-alert = #bd2c40
+alert = #BD2C40
+
+[colors-original]
+background = #DFDFDF
+background-alt = #CCC
+foreground = #333
+foreground-alt = #444
+primary = #2BBFEC
+secondary = #E60053
+alert = #BD2C40
 
 [bar/mybar]
-;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 27
-;offset-x = 1%
-;offset-y = 1%
 radius = 0
-fixed-center = false
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -51,31 +55,17 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-;font-0 = siji:pixelsize=10;1
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=10:antialias=false;0
 font-2 = WunconSiji:pixelsize=10;1
 font-3 = FontAwesome:pixelsize=10;1
 
 modules-left = i3
-modules-center = mpd
-modules-right = pulseaudio memory cpu wlan eth battery temperature date
+modules-center = mpd spotify
+modules-right = xbacklight pulseaudio memory cpu wlan eth battery date
 
 tray-position = right
 tray-padding = 0
-;tray-transparent = true
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -98,7 +88,24 @@ label-layout-underline = ${colors.primary}
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.primary}
+label-indicator-underline = ${colors.secondary}
+
+[module/spotify]
+type = custom/script
+interval = 1
+format = <label>
+exec = spotify_status.py -p ',' -f '{play_pause} {artist}: {song}' -t 35
+format-underline = #1db954
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
 type = internal/i3
@@ -159,6 +166,41 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.primary}
 label = %percentage:2%%
 
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+;format = <label> <ramp-coreload>
+format = <ramp-load> <label>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% (unreleased) - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+
+; Spacing between individual per-core ramps (unreleased)
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+ramp-load-0 = ▁
+ramp-load-1 = ▂
+ramp-load-2 = ▃
+ramp-load-3 = ▄
+ramp-load-4 = ▅
+ramp-load-5 = ▆
+ramp-load-6 = ▇
+ramp-load-7 = █
+ramp-load-foreground = ${colors.foreground-alt}
+
 [module/memory]
 type = internal/memory
 interval = 2
@@ -181,7 +223,7 @@ format-disconnected =
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
-
+
 ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
@@ -194,25 +236,19 @@ type = internal/network
 interface = enp4s0
 interval = 3.0
 
-format-connected-underline = ${colors.primary}
+format-underline = ${colors.primary}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
 format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
 interval = 1
 
-#date =
 date = " %Y-%m-%d"
 
-#time = %H:%M
 time = "%H:%M:%S"
 
 format-prefix = 
@@ -242,19 +278,20 @@ ramp-volume-foreground = ${colors.foreground-alt}
 type = internal/battery
 battery = BAT0
 adapter = AC0
-full-at = 98
+full-at = 99
+poll-interval = 1
 
 label-charging = %percentage%% (%time%)
 label-discharging = %percentage%% (%time%)
-label-full = %percentage%% (%time%)
+label-full = 100%
 
-format-charging = <animation-charging> <label-charging>
+format-charging =  <label-charging>
 format-charging-underline = ${colors.primary}
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${colors.primary}
 
-format-full = " 100%"
+format-full =  <label-full>
 format-full-underline = ${colors.primary}
 
 ramp-capacity-0 = 
@@ -263,18 +300,6 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
@@ -296,6 +321,31 @@ ramp-2 = 
 ramp-3 = 
 ramp-4 = 
 ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close = cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = reboot
+menu-1-0-exec = reboot
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
 
 [settings]
 screenchange-reload = true
