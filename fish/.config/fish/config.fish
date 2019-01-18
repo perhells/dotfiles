@@ -13,6 +13,9 @@ test -d "$NPM_BIN"; and set PATH $PATH $NPM_BIN
 set NuSMV_BIN "$HOME/NuSMV-2.6.0-Linux/bin"
 test -d "$NuSMV_BIN"; and set PATH $PATH $NuSMV_BIN
 
+set SOAP_BIN "$HOME/SmartBear/SoapUI-5.4.0/bin"
+test -d "$SOAP_BIN"; and set PATH $PATH $SOAP_BIN
+
 # Add opam to path
 if type -q opam
     eval (opam env)
