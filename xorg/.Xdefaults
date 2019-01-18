@@ -1,6 +1,8 @@
 URxvt.perl-ext-common: ...,font-size
 
-URxvt*font              : xft:DejaVu Sans Mono:pixelsize=20
+URxvt*font              : xft:Office Code Pro Medium:pixelsize=16:antialias=true
+!URxvt*font              : xft:DejaVu Sans Mono:pixelsize=16:antialias=true
+!URxvt*font              : xft:Source Code Pro Semibold:pixelsize=16:antialias=true
 URxvt*borderLess        : false
 URxvt*externalBorder    : 0
 URxvt*internalBorder    : 0
@@ -11,7 +13,7 @@ URxvt.keysym.C-Tab      : \033[27;5;9~
 URxvt.keysym.Control-Shift-ISO_Left_Tab: \033[27;6;9~
 
 ! disable ctrl-shift
-URxvt*iso14755          : False 
+URxvt*iso14755          : False
 URxvt*iso14755_52       : False
 
 URxvt.keysym.Shift-Up   : command:\033]720;1\007
