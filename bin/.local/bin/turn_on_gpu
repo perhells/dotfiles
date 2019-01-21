@@ -1,4 +1,8 @@
 #!/bin/bash
+
+set -e
+set -o nounset
+
 [ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
 
 if lsmod | grep -q acpi_call; then

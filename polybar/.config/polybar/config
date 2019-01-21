@@ -88,7 +88,7 @@ label-layout-underline = ${colors.primary}
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+label-indicator-underline = ${colors.primary}
 
 [module/spotify]
 type = custom/script
@@ -96,16 +96,6 @@ interval = 1
 format = <label>
 exec = spotify_status.py -p ',' -f '{play_pause} {artist}: {song}' -t 35
 format-underline = #1db954
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/i3]
 type = internal/i3
@@ -160,50 +150,15 @@ label-song-ellipsis = true
 
 [module/cpu]
 type = internal/cpu
-interval = 2
+interval = 1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.primary}
 label = %percentage:2%%
 
-; Available tags:
-;   <label> (default)
-;   <bar-load>
-;   <ramp-load>
-;   <ramp-coreload>
-;format = <label> <ramp-coreload>
-format = <ramp-load> <label>
-
-; Available tokens:
-;   %percentage% (default) - total cpu load averaged over all cores
-;   %percentage-sum% (unreleased) - Cumulative load on all cores
-;   %percentage-cores% - load percentage for each core
-;   %percentage-core[1-9]% - load percentage for specific core
-
-; Spacing between individual per-core ramps (unreleased)
-ramp-coreload-spacing = 1
-ramp-coreload-0 = ▁
-ramp-coreload-1 = ▂
-ramp-coreload-2 = ▃
-ramp-coreload-3 = ▄
-ramp-coreload-4 = ▅
-ramp-coreload-5 = ▆
-ramp-coreload-6 = ▇
-ramp-coreload-7 = █
-
-ramp-load-0 = ▁
-ramp-load-1 = ▂
-ramp-load-2 = ▃
-ramp-load-3 = ▄
-ramp-load-4 = ▅
-ramp-load-5 = ▆
-ramp-load-6 = ▇
-ramp-load-7 = █
-ramp-load-foreground = ${colors.foreground-alt}
-
 [module/memory]
 type = internal/memory
-interval = 2
+interval = 1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.primary}
@@ -212,17 +167,13 @@ label = %percentage_used%%
 [module/wlan]
 type = internal/network
 interface = wlp3s0
-interval = 3.0
+interval = 1
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = ${colors.primary}
 label-connected = %essid%
 
 format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -234,9 +185,9 @@ ramp-signal-foreground = ${colors.foreground-alt}
 [module/eth]
 type = internal/network
 interface = enp4s0
-interval = 3.0
+interval = 1
 
-format-underline = ${colors.primary}
+format-connected-underline = ${colors.primary}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
@@ -262,6 +213,8 @@ type = internal/pulseaudio
 
 format-volume = <ramp-volume> <label-volume>
 format-volume-underline = ${colors.primary}
+format-muted = <label-muted>
+format-muted-underline = ${colors.primary}
 
 label-volume = "%percentage%%"
 label-volume-foreground = ${colors.foreground}
