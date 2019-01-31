@@ -45,23 +45,27 @@ function send_notification {
 
 case $1 in
     up)
-        amixer -D pulse set Master on > /dev/null
         amixer -D pulse set Master 5%+ > /dev/null
+        amixer -D pulse set Master on > /dev/null
         send_notification
         ;;
     down)
-        amixer -D pulse set Master on > /dev/null
         amixer -D pulse set Master 5%- > /dev/null
+        if [ "$(get_volume)" = "0" ]; then
+            amixer -D pulse set Master off- > /dev/null
+        else
+            amixer -D pulse set Master on > /dev/null
+        fi
         send_notification
         ;;
     max)
-        amixer -D pulse set Master on > /dev/null
         amixer -D pulse set Master 100% > /dev/null
+        amixer -D pulse set Master on > /dev/null
         send_notification
         ;;
     min)
-        amixer -D pulse set Master on > /dev/null
         amixer -D pulse set Master 0% > /dev/null
+        amixer -D pulse set Master off- > /dev/null
         send_notification
         ;;
     mute)
