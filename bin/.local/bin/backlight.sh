@@ -56,11 +56,11 @@ function send_notification {
 case $1 in
     up)
         increase_brightness
-    send_notification
+        send_notification
     ;;
     down)
         decrease_brightness
-    send_notification
+        send_notification
     ;;
     status)
         get_brightness
