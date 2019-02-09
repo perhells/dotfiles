@@ -62,7 +62,7 @@ font-3 = FontAwesome:pixelsize=10;1
 
 modules-left = i3
 modules-center = mpd spotify
-modules-right = solaar-mouse solaar-keyboard xbacklight pulseaudio memory cpu wlan eth battery date
+modules-right = pulseaudio memory cpu wlan eth battery date
 
 tray-position = right
 tray-padding = 0

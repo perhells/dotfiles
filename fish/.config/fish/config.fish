@@ -9,12 +9,15 @@ end
 set NPM_BIN "$HOME/.npm-packages/bin"
 test -d "$NPM_BIN"; and set PATH $PATH $NPM_BIN
 
-# Add NuSMV to path
-set NuSMV_BIN "$HOME/NuSMV-2.6.0-Linux/bin"
-test -d "$NuSMV_BIN"; and set PATH $PATH $NuSMV_BIN
-
-set SOAP_BIN "$HOME/SmartBear/SoapUI-5.4.0/bin"
-test -d "$SOAP_BIN"; and set PATH $PATH $SOAP_BIN
+# Add bin dirs in program folders
+if test -d "$HOME/Programs";
+    for folder in (ls "$HOME/Programs")
+        set bindir "$HOME/Programs/$folder/bin"
+        if test -d "$bindir"
+            set PATH $PATH $bindir
+        end
+    end
+end
 
 # Add opam to path
 if type -q opam
