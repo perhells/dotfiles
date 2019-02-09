@@ -114,8 +114,7 @@ try:
             song = label_with_font.format(font=font, label=song)
 
         #print(output.format(artist=artist, song=song, play_pause=play_pause))
-        short_output = fix_string(u'{artist}: {song}')
-        print(short_output.format(artist=artist, song=song))
+        print("%s: %s" % (artist, song))
 
 except Exception as e:
     if isinstance(e, dbus.exceptions.DBusException):

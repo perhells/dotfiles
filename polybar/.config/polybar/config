@@ -153,7 +153,10 @@ label-urgent-padding = 2
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+;format-online = <label-song> <icon-prev> <icon-stop> <toggle> <icon-next>
+format-online =
+format-playing = <label-song>
+format-playing-underline = ${colors.secondary}
 
 icon-prev = 
 icon-stop = 
@@ -161,7 +164,7 @@ icon-play = 
 icon-pause = 
 icon-next = 
 
-label-song-maxlen = 25
+label-song-maxlen = 35
 label-song-ellipsis = true
 
 [module/cpu]
@@ -215,14 +218,10 @@ type = internal/date
 interval = 1
 
 date = "%Y-%m-%d"
-
 time = "%H:%M:%S"
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = ${colors.primary}
-
 label = %date% %time%
+format-underline = ${colors.primary}
 
 [module/pulseaudio]
 type = internal/pulseaudio
