@@ -5,7 +5,8 @@
 #### Display ####
 
     monitor = 0
-    geometry = "330x5-15+40"
+    #geometry = "330x5-15+40"
+    geometry = "660x10-30+80"
     timeout = 3
 
     # Sort messages by urgency.
@@ -37,8 +38,10 @@
     separator_color = auto
 
     # Padding between text and separator.
-    padding = 16
-    horizontal_padding = 16
+    #padding = 16
+    #horizontal_padding = 16
+    padding = 32
+    horizontal_padding = 32
 
     startup_notification = false
 
@@ -94,7 +97,7 @@
     icon_position = left
 
     # Scale larger icons down to this size (0 to disable).
-    max_icon_size = 32
+    max_icon_size = 64
 
     #icon_path = /usr/share/icons/gnome/32x32/actions:/usr/share/icons/gnome/32x32/animations:/usr/share/icons/gnome/32x32/apps:/usr/share/icons/gnome/32x32/categories:/usr/share/icons/gnome/32x32/devices:/usr/share/icons/gnome/32x32/emblems:/usr/share/icons/gnome/32x32/emotes:/usr/share/icons/gnome/32x32/mimetypes:/usr/share/icons/gnome/32x32/places:/usr/share/icons/gnome/32x32/status
 

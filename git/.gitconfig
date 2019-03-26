@@ -28,3 +28,8 @@
     conflictstyle = diff3
 [mergetool]
     prompt = false
+[user]
+	email = per.hellstrom@dewire.com
+	name = Per Hellström
+[core]
+	editor = vim

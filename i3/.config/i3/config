@@ -3,7 +3,6 @@
 #
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
-#
 
 # i3 config file (v4)
 #
@@ -12,36 +11,14 @@
 set $mod Mod4
 set $alt Mod1
 
-#gaps inner 0
-#gaps outer 0
-
-#smart_gaps on
-
-#bindsym $mod+a gaps inner all plus 5
-#bindsym $mod+x gaps inner all minus 5
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-#font pango:monospace 10
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 10
+# Font for window titles.
 font pango:Office Code Pro Medium 10
-
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # Lock screen
-#bindsym $mod+l exec --no-startup-id i3lock -e -c 090909
-bindsym $mod+l exec --no-startup-id ~/.local/bin/lockscreen.sh
+bindsym Ctrl+$alt+l exec --no-startup-id lockscreen.sh
 
 # Shutdown
 bindsym $mod+Ctrl+q exec --no-startup-id shutdown now
@@ -55,26 +32,23 @@ bindsym $mod+Shift+Return exec --no-startup-id newworkspace i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
-#bindsym $alt+F4 kill
+bindsym $alt+F4 kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
-#bindsym $mod+space exec --no-startup-id dmenu_run -fn "DejaVu Sans Mono-12"
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 bindsym $mod+space exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
+# start i3-dmenu-desktop which only displays applications with .desktop files
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
+# start nautilus
 bindsym $mod+e exec --no-startup-id nautilus
 
 # change focus
-#bindsym $mod+j focus left
-#bindsym $mod+k focus down
-#bindsym $mod+l focus up
-#bindsym $mod+odiaeresis focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -83,10 +57,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -95,30 +69,20 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Ctrl+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Ctrl+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
+# change container layout (tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-#bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
 
 bindsym $mod+Tab workspace next
 bindsym $alt+Tab workspace next
@@ -126,16 +90,16 @@ bindsym $mod+Shift+Tab workspace prev
 bindsym $alt+Shift+Tab workspace prev
 
 # Get new workspace
-bindsym $mod+n exec --no-startup-id ~/.local/bin/newworkspace
+bindsym $mod+n exec --no-startup-id newworkspace
 
 # Jump to first/last workspace
 bindsym $mod+Home workspace number 1
-bindsym $mod+End exec --no-startup-id ~/.local/bin/last_workspace.sh
-
-bindsym $mod+Shift+a focus parent,kill
+bindsym $mod+End exec --no-startup-id last_workspace.sh
 
 bindsym $mod+Ctrl+Left move workspace to output left
 bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Down move workspace to output down
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
@@ -176,10 +140,10 @@ mode "resize" {
     # Pressing right will grow the window’s width.
     # Pressing up will shrink the window’s height.
     # Pressing down will grow the window’s height.
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym odiaeresis resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
     # same bindings, but for the arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
@@ -194,94 +158,48 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-#bar {
-#    status_command i3status
-#    i3bar_command i3bar
-#    #i3bar_command i3bar -t
-#    #i3bar_command ~/.i3/lemonbar/i3_lemonbar.py
-#    position top
-#    font pango:DejaVu Sans Mono, Icons 10
-#    tray_output primary
-#    #output
-#
-#    colors {
-#        background #000002c8
-#        statusline #00A5FF #that neon blue
-#        separator #666666
-#
-#        focused_workspace  #666666 #666666 #ffffff
-#        active_workspace   #555555 #555555 #ffffff
-#        inactive_workspace #333333 #333333 #888888
-#        urgent_workspace   #333333 #900000 #ffffff
-#    }
-#}
-
-#bar {
-#    position top
-#    font pango:DejaVu Sans Mono, Icons 10
-#    output VIRTUAL1
-#    tray_output none
-#
-#    colors {
-#        background #262626
-#        statusline #00A5FF #that neon blue
-#        separator #666666
-#
-#        focused_workspace  #666666 #666666 #ffffff
-#        active_workspace   #555555 #555555 #ffffff
-#        inactive_workspace #333333 #333333 #888888
-#        urgent_workspace   #333333 #900000 #ffffff
-#    }
-#}
-
+# Floating window classes
 for_window [class="net-runelite-launcher-Launcher"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
+
 new_window none
 new_float none
 focus_follows_mouse no
 mouse_warping none
 
-bindsym $mod+m exec --no-startup-id ~/.local/bin/toggle_monitor.sh
+# xrandr script
+bindsym $mod+m exec --no-startup-id autoxrandr.sh
 
-# Multimedia keys
-# increase volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.local/bin/volume.sh up
-# max volume
-bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id ~/.local/bin/volume.sh max
-
-# decrease volume
-bindsym XF86AudioLowerVolume  exec --no-startup-id ~/.local/bin/volume.sh down
-# no volume
-bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id ~/.local/bin/volume.sh min
-
-# mute volume
-bindsym XF86AudioMute exec --no-startup-id ~/.local/bin/volume.sh mute
+# Volume keys
+bindsym XF86AudioMute exec --no-startup-id volume.sh mute
+bindsym XF86AudioLowerVolume  exec --no-startup-id volume.sh down
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh up
+bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id volume.sh min
+bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id volume.sh max
 
 # pause/play/next/previous
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
-bindsym Ctrl+$alt+Up exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
-bindsym Ctrl+$alt+Down exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
-bindsym Ctrl+$alt+Right exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
-bindsym Ctrl+$alt+Left exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym Ctrl+$alt+Up exec --no-startup-id playerctl stop
+bindsym Ctrl+$alt+Down exec --no-startup-id playerctl play-pause
+bindsym Ctrl+$alt+Right exec --no-startup-id playerctl next
+bindsym Ctrl+$alt+Left exec --no-startup-id playerctl previous
 
 # Screen brightness
-bindsym $mod+F4 exec --no-startup-id ~/.local/bin/backlight.sh up
-bindsym $mod+F3 exec --no-startup-id ~/.local/bin/backlight.sh down
+bindsym $mod+F4 exec --no-startup-id backlight.sh up
+bindsym $mod+F3 exec --no-startup-id backlight.sh down
+bindsym XF86MonBrightnessUp exec --no-startup-id backlight.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id backlight.sh down
 
 # Keyboard brightness
-bindsym XF86KbdBrightnessUp exec --no-startup-id ~/.local/bin/kb-light.py +
-bindsym XF86KbdBrightnessDown exec --no-startup-id ~/.local/bin/kb-light.py -
+bindsym XF86KbdBrightnessUp exec --no-startup-id kb-light.py +
+bindsym XF86KbdBrightnessDown exec --no-startup-id kb-light.py -
 
 # Touchpad
-bindsym XF86TouchpadToggle exec --no-startup-id ~/.local/bin/touchpad_toggle.sh
+bindsym XF86TouchpadToggle exec --no-startup-id touchpad_toggle.sh
 
 # scrot
 bindsym Print exec prntscr
@@ -290,19 +208,24 @@ bindsym Print exec prntscr
 bindsym --release Shift+Print exec prntscr -s
 
 # If you want to add drama, press F13
-bindsym F13 exec --no-startup-id ~/.local/bin/sound_effect.sh
+bindsym F13 exec --no-startup-id sound_effect.sh
 
-# Start dropbox
-#exec --no-startup-id dropbox
+bindsym $mod+x exec --no-startup-id urxvt -geometry 60x30 -name floating -e nmtui-connect
+for_window [class="URxvt" instance="floating"] floating enable
 
-# Start Spotify and Slack on correct workspaces
-#for_window [class="Spotify"] move to workspace number 1
-#for_window [class="Slack"] move to workspace number 3
-#exec --no-startup-id spotify
-#exec --no-startup-id slack
+# class                 border  backgr. text    indicator child_border
+client.focused          #444444 #444444 #ffffff #2e9ef4   #444444
+client.focused_inactive #222222 #222222 #ffffff #222222   #222222
+client.unfocused        #222222 #222222 #ffffff #292d2e   #222222
+client.urgent           #900000 #400000 #ffffff #400000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-# Initial workspace
-#exec --no-startup-id i3-msg 'workspace number 2'
-#exec --no-startup-id google-chrome
+client.background       #ffffff
 
-exec --no-startup-id bash -c "if [ -f ~/.xsessionrc.i3 ]; then ~/.xsessionrc.i3; fi"
+exec_always --no-startup-id autoxrandr.sh
+
+# Start polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Renaming script for workspaces (displays icons in polybar)
+exec_always --no-startup-id $HOME/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces

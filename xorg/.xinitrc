@@ -36,20 +36,20 @@ if [ -d "$HOME/Matlab/bin" ] ; then
     PATH="$HOME/Matlab/bin:$PATH"
 fi
 
-xcompmgr &
+#xcompmgr &
 
-sh ~/.fehbg &
+#sh ~/.fehbg &
 
-nm-applet --indicator &
+#nm-applet --indicator &
 
-dropbox &
+#dropbox &
 
 # Disable scrolling and tapping while typing
-syndaemon -i 0.5 -t -K -R &
+#syndaemon -i 0.5 -t -K -R &
 
 # Speedup key repeat rate
 # xset r rate [delay] [speed]
-xset r rate 250 40
+#xset r rate 250 40
 
 exec i3
 #exec $1

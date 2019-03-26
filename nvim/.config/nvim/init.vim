@@ -18,6 +18,8 @@ Plug 'vim-syntastic/syntastic'
 Plug 'wannesm/wmnusmv.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'mechatroner/rainbow_csv'
 call plug#end()
 
 syntax on
@@ -71,54 +73,154 @@ noremap <A-down> <C-w>5+
 noremap <A-up> <C-w>5-
 noremap <A-right> <C-w>5>
 
+nnoremap <C-S-g> :!grep -rn <cword> 2>/dev/null<CR>
+
 set lazyredraw
 set title
 set autoread
 set noswapfile
 
+let g:lightline = {
+  \ 'tab_component_function': {
+  \   'filename': 'MyTabFilename',
+  \ },
+  \}
+
+function! MyTabFilename(n)
+  let tabs = BuildTabs()
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let bufnum = buflist[winnr - 1]
+  let bufname = expand('#'.bufnum.':t')
+  return tabs[a:n - 1].uniq_name
+endfunction
+
+function! BuildTabs()
+  let tabs = []
+  for i in range(tabpagenr('$'))
+    let tabnum = i + 1
+    let buflist = tabpagebuflist(tabnum)
+    let file_path = ''
+    let tab_name = bufname(buflist[0])
+    if tab_name =~ 'NERD_tree' && len(buflist) > 1
+      let tab_name = bufname(buflist[1])
+    end
+    let is_custom_name = 0
+    if tab_name == ''
+      let tab_name = '[No Name]'
+      let is_custom_name = 1
+    elseif tab_name =~ 'fzf'
+      let tab_name = 'FZF'
+      let is_custom_name = 1
+    else
+      let file_path = fnamemodify(tab_name, ':p')
+      let tab_name = fnamemodify(tab_name, ':p:t')
+    end
+    let tab = {
+      \ 'number': tabnum,
+      \ 'name': tab_name,
+      \ 'uniq_name': tab_name,
+      \ 'file_path': file_path,
+      \ 'is_custom_name': is_custom_name
+      \ }
+    call add(tabs, tab)
+  endfor
+  call CalculateTabUniqueNames(tabs)
+  return tabs
+endfunction
+
+function! CalculateTabUniqueNames(tabs)
+  for tab in a:tabs
+    if tab.is_custom_name | continue | endif
+    let tab_common_path = ''
+    for other_tab in a:tabs
+      if tab.name != other_tab.name || tab.file_path == other_tab.file_path
+        \ || other_tab.is_custom_name
+        continue
+      endif
+      let common_path = GetCommonPath(tab.file_path, other_tab.file_path)
+      if tab_common_path == '' || len(common_path) < len(tab_common_path)
+        let tab_common_path = common_path
+      endif
+    endfor
+    if tab_common_path == '' | continue | endif
+    let common_path_has_immediate_child = 0
+    for other_tab in a:tabs
+      if tab.name == other_tab.name && !other_tab.is_custom_name
+        \ && tab_common_path == fnamemodify(other_tab.file_path, ':h')
+        let common_path_has_immediate_child = 1
+        break
+      endif
+    endfor
+    if common_path_has_immediate_child
+      let tab_common_path = fnamemodify(common_path, ':h')
+    endif
+    let path = tab.file_path[len(tab_common_path)+1:-1]
+    let path = fnamemodify(path, ':~:.:h')
+    let dirs = split(path, '/', 1)
+    if len(dirs) >= 5
+      let path = dirs[0] . '/.../' . dirs[-1]
+    endif
+    let tab.uniq_name = path . '/' . tab.name
+  endfor
+endfunction
+
+function! GetCommonPath(path1, path2)
+  let dirs1 = split(a:path1, '/', 1)
+  let dirs2 = split(a:path2, '/', 1)
+  let i_different = 0
+  for i in range(len(dirs1))
+    if get(dirs1, i) != get(dirs2, i)
+      let i_different = i
+      break
+    endif
+  endfor
+  return join(dirs1[0:i_different-1], '/')
+endfunction
+
 " Jump to the last position when reopening a file
 if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 function! ToggleMouse()
-    " check if mouse is enabled
-    if &mouse == "a"
-        " disable mouse
-        set mouse=
-        echo "Mouse disabled"
-        set scrolloff=999
-        set sidescrolloff=999
-    else
-        " enable mouse everywhere
-        set mouse=a
-        echo "Mouse enabled"
-        set scrolloff=0
-        set sidescrolloff=0
-    endif
+  " check if mouse is enabled
+  if &mouse == "a"
+    " disable mouse
+    set mouse=
+    echo "Mouse disabled"
+    set scrolloff=999
+    set sidescrolloff=999
+  else
+    " enable mouse everywhere
+    set mouse=a
+    echo "Mouse enabled"
+    set scrolloff=0
+    set sidescrolloff=0
+  endif
 endfunc
 
 " Whitespace/special chars for list
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 
 function! ToggleWhitespace()
-    if &list == 1
-        set nolist
-        echo "Whitespace highlighting disabled"
-    else
-        set list
-        echo "Whitespace highlighting enabled"
-    endif
+  if &list == 1
+    set nolist
+    echo "Whitespace highlighting disabled"
+  else
+    set list
+    echo "Whitespace highlighting enabled"
+  endif
 endfunc
 
 function! ToggleWrap()
-    if (&wrap == 1)
-        set nowrap
-        echo "Wrap disabled"
-    else
-        set wrap
-        echo "Wrap enabled"
-    endif
+  if (&wrap == 1)
+    set nowrap
+    echo "Wrap disabled"
+  else
+    set wrap
+    echo "Wrap enabled"
+  endif
 endfunc
 
 nnoremap <F2> :echon "F3: Toggle paste\nF4: Toggle mouse\nF5: Toggle whitespace\nF6: Toggle wrap\nF7: Exec file"<CR>
@@ -135,14 +237,26 @@ au BufRead *.py nmap <F7> :w !clear & python<CR>
 "au Bufread *.md nmap <F7> :w<CR>:silent !mdpdf % &<CR>:redraw!<CR>
 au Bufread *.md nmap <F7> :w<CR>:silent !grip --quiet --export %<CR>:redraw!<CR>
 
+function! ShowTabSettings()
+  if (&expandtab == 1)
+    echon 'Indenting using spaces: ' &shiftwidth ' '
+  else
+    echon 'Indenting using tabs. '
+  endif
+  echon '(Tabwidth: ' &tabstop ')'
+endfunc
+
+nnoremap <F8> :call ShowTabSettings()<CR>
+
 let g:nerdtree_tabs_open_on_console_startup=2
+let g:nerdtree_tabs_autofind=1
 
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-let g:multi_cursor_quit_key = "<Esc>"
-
 map <silent> <C-o> :NERDTreeTabsToggle<CR>
+
+let g:multi_cursor_exit_from_insert_mode = 0
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
