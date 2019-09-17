@@ -107,3 +107,5 @@ function s0; pwd > ~/.saved_folder0; end
 function p0; cat ~/.saved_folder0 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 0: $filename"; done' bash; end
 function l0; cd (cat ~/.saved_folder0); end
 function r0; rm ~/.saved_folder0 2> /dev/null; end
+
+function exgrep; grep -v $argv[2] | grep $argv[1]; end
