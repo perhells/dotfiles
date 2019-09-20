@@ -108,3 +108,13 @@ function fish_right_prompt
     set_color $delimcolor
     echo -n "]"
 end
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/per/Code/Telia/WebView/telia-sense-web-view-back-end/node_modules/tabtab/.completions/serverless.fish ]; and . /home/per/Code/Telia/WebView/telia-sense-web-view-back-end/node_modules/tabtab/.completions/serverless.fish
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/per/Code/Telia/WebView/telia-sense-web-view-back-end/node_modules/tabtab/.completions/sls.fish ]; and . /home/per/Code/Telia/WebView/telia-sense-web-view-back-end/node_modules/tabtab/.completions/sls.fish
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /home/per/Code/Telia/WebView/telia-sense-web-view-back-end/node_modules/tabtab/.completions/slss.fish ]; and . /home/per/Code/Telia/WebView/telia-sense-web-view-back-end/node_modules/tabtab/.completions/slss.fish
