@@ -20,6 +20,7 @@ Plug 'chrisbra/Colorizer'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mechatroner/rainbow_csv'
+Plug 'vitalk/vim-shebang'
 call plug#end()
 
 syntax on
