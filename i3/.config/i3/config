@@ -222,10 +222,14 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
+# Automatic xrandr
 exec_always --no-startup-id autoxrandr.sh
 
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# Run xsessionrc
+exec_always --no-startup-id $HOME/.xsessionrc.i3
 
 # Renaming script for workspaces (displays icons in polybar)
 exec_always --no-startup-id $HOME/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces
