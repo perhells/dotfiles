@@ -17,10 +17,10 @@ if [ "$outputcount" -gt 1 ]; then
     for output in $outputs; do
         if [[ ! $output =~ ^LVDS.*$ ]] && [[ ! $output =~ ^eDP.*$ ]]; then
             scale=""
-            if [ "$output" = "DP1" ]; then
+            if [[ $output =~ ^DP-?[0-9]+ ]]; then
                 scale="--scale 1.5x1.5"
             fi
-            echo "xrandr $output: auto (scale: $scale)"
+            echo "$output: auto (scale: $scale)"
             xrandr --output $output --auto --primary $scale --output $main --off
             #echo "xrandr $output: auto (above $previous) $scale"
             #xrandr --output $output --auto --above $previous $scale
