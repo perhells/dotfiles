@@ -20,7 +20,10 @@ synclient ClickFinger3=2
 xset r rate 250 50
 xset -display :0 s off -dpms
 
-~/.fehbg &
+autoxrandr.sh
+~/.fehbg
+runIfNotRunning dunst &
+runIfNotRunning ~/.config/polybar/launch.sh &
 runIfNotRunning compton --config ~/.config/compton.conf &
 runIfNotRunning nm-applet &
-runIfNotRunning dunst &
+runIfNotRunning ~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
