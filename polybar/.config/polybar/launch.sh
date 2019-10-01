@@ -14,7 +14,7 @@ else
   bar=default
 fi
 
-if type "xrandr"; then
+if type "xrandr" > /dev/null; then
   TRAY_POS=right
   for MONITOR in $(xrandr --query | grep " connected" | sort | cut -d" " -f1); do
     echo "Starting polybar $bar on $MONITOR"
