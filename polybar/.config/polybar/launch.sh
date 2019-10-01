@@ -15,8 +15,11 @@ else
 fi
 
 if type "xrandr"; then
-  for MONITOR in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$MONITOR polybar --reload $bar &
+  TRAY_POS=right
+  for MONITOR in $(xrandr --query | grep " connected" | sort | cut -d" " -f1); do
+    echo "Starting polybar $bar on $MONITOR"
+    MONITOR=$MONITOR TRAY_POS=$TRAY_POS polybar --reload $bar &
+    TRAY_POS=""
   done
 else
   polybar --reload $bar &
