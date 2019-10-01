@@ -10,6 +10,22 @@ for output in $outputs; do
     fi
 done
 
+if [[ $outputs =~ (^|[[:space:]])"DVI-I-1-1"($|[[:space:]]) ]] && [[ $outputs =~ (^|[[:space:]])"DVI-I-2-2"($|[[:space:]]) ]]; then
+    echo "Mobprog detected, using preset!"
+    for output in $outputs; do
+        if [[ ! $output =~ ^DVI.*$ ]]; then
+            echo "$output: off"
+            xrandr --output $output --off
+        fi
+    done
+
+    echo "$output: right"
+    xrandr --output "DVI-I-1-1" --auto --scale 1x1 --primary
+    echo "$output: left"
+    xrandr --output "DVI-I-2-2" --auto --scale 1x1 --left-of "DVI-I-1-1"
+    exit 0
+fi
+
 if [ "$outputcount" -gt 1 ]; then
     #echo "$main: auto primary"
     #xrandr --output $main --primary --auto
