@@ -39,7 +39,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 bindsym $mod+space exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 # start i3-dmenu-desktop which only displays applications with .desktop files
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
-bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
+#bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
 # start nautilus
 bindsym $mod+e exec --no-startup-id nautilus
