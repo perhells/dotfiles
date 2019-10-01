@@ -121,3 +121,10 @@ function hk
     echo -n "$str" | xclip -selection c
     echo "Hemköp in da clipboard!"
 end
+
+function git-gone
+    git fetch -p > /dev/null
+    for branch in (git branch -vv | grep ': gone]' | awk '{print $1}')
+        echo $branch
+    end
+end
