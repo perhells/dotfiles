@@ -213,6 +213,8 @@ bindsym F13 exec --no-startup-id sound_effect.sh
 bindsym $mod+x exec --no-startup-id urxvt -geometry 60x30 -name floating -e nmtui-connect
 for_window [class="URxvt" instance="floating"] floating enable
 
+bindsym Ctrl+Shift+h exec --no-startup-id echo -n ":hk1::hk2::hk3::hk4::hk5::hk6:" | xclip -selection c
+
 # class                 border  backgr. text    indicator child_border
 client.focused          #444444 #444444 #ffffff #2e9ef4   #444444
 client.focused_inactive #222222 #222222 #ffffff #222222   #222222
