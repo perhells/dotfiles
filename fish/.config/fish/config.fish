@@ -93,7 +93,7 @@ function fish_prompt
     set_color $pathcolor
     echo -n " "(prompt_dir)" "
     set_color $delimcolor
-    echo -n "❯ "
+    echo -n "> "
 end
 
 # Right prompt consisting of git info and bg jobs

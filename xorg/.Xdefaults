@@ -1,8 +1,6 @@
 URxvt.perl-ext-common   : ...,font-size
 
-URxvt*font              : xft:Office Code Pro Medium:pixelsize=36,xft:FontAwesome:pixelsize=36
-!URxvt*font              : xft:DejaVu Sans Mono:pixelsize=16:antialias=true
-!URxvt*font              : xft:Source Code Pro Semibold:pixelsize=16:antialias=true
+URxvt*font              : xft:Office Code Pro Medium:size=12,xft:FontAwesome:size=12
 URxvt*borderLess        : false
 URxvt*externalBorder    : 0
 URxvt*internalBorder    : 0
@@ -37,7 +35,7 @@ URxvt*scrollstyle       : plain
 ! scrollbar disable
 URxvt*scrollBar         : false
 
-URxvt*scrollTtyOutput   : false
+URxvt*scrollTtyOutput   : true
 URxvt*scrollWithBuffer  : true
 URxvt*scrollTtyKeypress : true
 

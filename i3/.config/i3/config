@@ -39,7 +39,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 bindsym $mod+space exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 # start i3-dmenu-desktop which only displays applications with .desktop files
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
-bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
+#bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
 # start nautilus
 bindsym $mod+e exec --no-startup-id nautilus
@@ -213,6 +213,8 @@ bindsym F13 exec --no-startup-id sound_effect.sh
 bindsym $mod+x exec --no-startup-id urxvt -geometry 60x30 -name floating -e nmtui-connect
 for_window [class="URxvt" instance="floating"] floating enable
 
+bindsym Ctrl+Shift+h exec --no-startup-id echo -n ":hk1::hk2::hk3::hk4::hk5::hk6:" | xclip -selection c
+
 # class                 border  backgr. text    indicator child_border
 client.focused          #444444 #444444 #ffffff #2e9ef4   #444444
 client.focused_inactive #222222 #222222 #ffffff #222222   #222222
@@ -222,10 +224,5 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
-exec_always --no-startup-id autoxrandr.sh
-
-# Start polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# Renaming script for workspaces (displays icons in polybar)
-exec_always --no-startup-id $HOME/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces
+# Run xsessionrc
+exec_always --no-startup-id $HOME/.xsessionrc.i3

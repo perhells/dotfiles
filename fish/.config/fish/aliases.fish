@@ -107,3 +107,24 @@ function s0; pwd > ~/.saved_folder0; end
 function p0; cat ~/.saved_folder0 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 0: $filename"; done' bash; end
 function l0; cd (cat ~/.saved_folder0); end
 function r0; rm ~/.saved_folder0 2> /dev/null; end
+
+function exgrep; grep -v $argv[2] | grep $argv[1]; end
+
+function setclip; xclip -selection c; end
+function getclip; xclip -selection c -o; end
+
+function hk
+    set str ""
+    for i in (seq 6)
+        set str "$str:hk$i:"
+    end
+    echo -n "$str" | xclip -selection c
+    echo "Hemköp in da clipboard!"
+end
+
+function git-gone
+    git fetch -p > /dev/null
+    for branch in (git branch -vv | grep ': gone]' | awk '{print $1}')
+        echo $branch
+    end
+end
