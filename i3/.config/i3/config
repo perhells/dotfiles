@@ -159,7 +159,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Floating window classes
-#for_window [class="net-runelite-launcher-Launcher"] floating enable
+for_window [title="RuneLite Launcher"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
