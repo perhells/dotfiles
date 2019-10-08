@@ -127,3 +127,10 @@
     appname=Spotify
     background = "#222222"
     foreground = "#ffffff"
+
+[Runelite]
+    summary=RuneLite
+    background = "#222222"
+    foreground = "#ffffff"
+    timeout = 3
+    script = ~/.local/bin/ding.sh
