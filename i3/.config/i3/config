@@ -35,10 +35,10 @@ bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
-bindsym $mod+space exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
+bindsym $mod+d exec --no-startup-id dmenu_run -i -fn "Office Code Pro Medium-12"
+bindsym $mod+space exec --no-startup-id dmenu_run -i -fn "Office Code Pro Medium-12"
 # start i3-dmenu-desktop which only displays applications with .desktop files
-bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
+bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -fn "Office Code Pro Medium-12"'
 #bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
 # start nautilus
@@ -181,6 +181,7 @@ bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id volume.sh max
 
 # pause/play/next/previous
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym Ctrl+$alt+Up exec --no-startup-id playerctl stop
@@ -226,3 +227,8 @@ client.background       #ffffff
 
 # Run xsessionrc
 exec_always --no-startup-id $HOME/.xsessionrc.i3
+
+# Run xsessionrc
+bindsym $mod+F5 exec --no-startup-id $HOME/.xsessionrc.i3 192
+bindsym $mod+F6 exec --no-startup-id $HOME/.xsessionrc.i3 144
+bindsym $mod+F7 exec --no-startup-id $HOME/.xsessionrc.i3 96
