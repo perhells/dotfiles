@@ -44,7 +44,7 @@ URxvt*depth             : 32
 
 URxvt*cursorBlink       : false
 URxvt*inheritPixmap     : false
-URxvt*saveLines         : 2000
+URxvt*saveLines         : 20000
 
 ! Molokai theme
 *.background        : #1C1D1E
