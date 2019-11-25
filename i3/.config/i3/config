@@ -41,8 +41,8 @@ bindsym $mod+space exec --no-startup-id dmenu_run -i -fn "Office Code Pro Medium
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -fn "Office Code Pro Medium-12"'
 #bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
-# start nautilus
-bindsym $mod+e exec --no-startup-id nautilus
+# start nemo
+bindsym $mod+e exec --no-startup-id nemo
 
 # change focus
 bindsym $mod+h focus left
@@ -203,7 +203,7 @@ bindsym XF86KbdBrightnessDown exec --no-startup-id kb-light.py -
 bindsym XF86TouchpadToggle exec --no-startup-id touchpad_toggle.sh
 
 # scrot
-bindsym Print exec prntscr
+bindsym Print exec --no-startup-id prntscr
 
 # scrot - select window or rectangle
 bindsym --release Shift+Print exec prntscr -s
