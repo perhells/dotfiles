@@ -18,8 +18,6 @@
     untracked = magenta bold
 [color "branch"]
     remote = yellow
-[branch]
-    autosetuprebase = always
 [alias]
     wdiff = diff --color-words
     wshow = show --color-words
