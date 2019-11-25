@@ -19,13 +19,20 @@ if test -d "$HOME/Programs";
     end
 end
 
+# Add ~/.local/bin to PATH
+if test -d "$HOME/.local/bin";
+    set PATH "$HOME/.local/bin" $PATH
+end
+
 # Add opam to path
 if type -q opam
     eval (opam env)
 end
 
 # Auto completion for aws-cli
-test -x (which aws_completer); and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+if type -q aws_completer
+    and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+end
 
 # start X at login
 if status --is-login

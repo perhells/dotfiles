@@ -41,7 +41,20 @@ synclient ClickFinger1=1
 synclient ClickFinger2=3
 synclient ClickFinger3=2
 
+# Faster keyboard repeat rate
 xset r rate 250 50
+# Remove mouse acceleration
+xset m 0 0
+
+MOUSE_SPEED_REDUCTION=3
+if xinput list | grep "Mionix NAOS 8200" > /dev/null; then
+    # Reduce mouse speed if Mionix NAOS 8200 exists
+    MOUSE_ID=$(xinput list | grep "Mionix NAOS 8200.*pointer" | sed -e "s/.*id=\([0-9]\+\).*/\1/")
+    PROP_ID=$(xinput list-props $MOUSE_ID | grep "Coordinate Transformation Matrix" | sed -e "s/.*(\([0-9]\+\)):.*/\1/")
+    xinput set-prop "$MOUSE_ID" "$PROP_ID" 1 0 0 0 1 0 0 0 "$MOUSE_SPEED_REDUCTION"
+fi
+
+# Disable sleep
 xset -display :0 s off -dpms
 
 # Compton must be restarted later, after running xrandr

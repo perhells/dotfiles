@@ -159,7 +159,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Floating window classes
-for_window [class="net-runelite-launcher-Launcher"] floating enable
+for_window [title="RuneLite Launcher"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
@@ -178,6 +178,9 @@ bindsym XF86AudioLowerVolume  exec --no-startup-id volume.sh down
 bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh up
 bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id volume.sh min
 bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id volume.sh max
+
+# bluetooth connection script
+bindsym $mod+b exec --no-startup-id tsa3118b_toggle.sh
 
 # pause/play/next/previous
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause

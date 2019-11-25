@@ -1,2 +1,2 @@
 #!/bin/bash
-runelite --mode=OFF
+~/.local/bin/RuneLite.AppImage --mode=OFF
