@@ -6,7 +6,9 @@
 
     monitor = 0
     #geometry = "330x5-15+40"
-    geometry = "660x10-30+80"
+    #geometry = "495x8-23+60"
+    geometry = ${DUNST_GEOMETRY}
+    #geometry = "660x10-30+80"
     timeout = 3
 
     # Sort messages by urgency.
