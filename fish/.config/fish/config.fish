@@ -44,6 +44,13 @@ if test -f ~/.config/fish/local_aliases.fish
     . ~/.config/fish/local_aliases.fish
 end
 
+# Load local functions
+if test -d ~/.config/fish/local
+    for function_file in ~/.config/fish/local/*
+        . $function_file
+    end
+end
+
 # Disable greeting on shell start
 function fish_greeting
 end
