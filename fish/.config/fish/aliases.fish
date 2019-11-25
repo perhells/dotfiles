@@ -21,8 +21,7 @@ function ssh; export TERM='xterm-256color'; command ssh $argv; export TERM='rxvt
 function ssh-agent; eval (command ssh-agent -c); end
 
 # Comfort
-function ..; cd ..; end
-function ls; command ls -lh --group-directories-first --color $argv; end
+function ll; command ls -lh --group-directories-first --color $argv; end
 function grep; command grep --color=auto $argv; end
 function top; atop; end
 function visudo; sudo EDITOR=vim visudo; end
@@ -110,21 +109,27 @@ function r0; rm ~/.saved_folder0 2> /dev/null; end
 
 function exgrep; grep -v $argv[2] | grep $argv[1]; end
 
-function setclip; xclip -selection c; end
-function getclip; xclip -selection c -o; end
+function pbcopy; xclip -selection clipboard; end
+function pbpaste; xclip -selection clipboard -o; end
 
 function hk
     set str ""
     for i in (seq 6)
         set str "$str:hk$i:"
     end
-    echo -n "$str" | xclip -selection c
-    echo "Hemköp in da clipboard!"
+    echo -n "$str" | pbcopy
+    figlet Hemkop
 end
 
 function git-gone
     git fetch -p > /dev/null
-    for branch in (git branch -vv | grep ': gone]' | awk '{print $1}')
+    for branch in (git branch -vv --color=never | grep ': gone]' | awk '{print $1}')
         echo $branch
     end
+end
+
+function git-gone-clean; git branch -D (git-gone); end
+
+function ldapgroups
+    ldapsearch -LLL -x -h ldap.dewire.com -b dc=dewire,dc=com member=uid=$argv[1],ou=people,dc=dewire,dc=com cn | grep "^cn:" | sed -e "s/^cn: //"
 end
