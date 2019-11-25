@@ -20,30 +20,18 @@ if [[ $outputs =~ (^|[[:space:]])"DVI-I-1-1"($|[[:space:]]) ]] && [[ $outputs =~
     done
 
     echo "$output: right"
-    xrandr --output "DVI-I-1-1" --auto --scale 1x1 --primary
+    xrandr --output "DVI-I-1-1" --auto --primary
     echo "$output: left"
-    xrandr --output "DVI-I-2-2" --auto --scale 1x1 --left-of "DVI-I-1-1"
+    xrandr --output "DVI-I-2-2" --auto --left-of "DVI-I-1-1"
     exit 0
 fi
 
 if [ "$outputcount" -gt 1 ]; then
-    #echo "$main: auto primary"
-    #xrandr --output $main --primary --auto
     echo "$main: off"
     xrandr --output $main --off
     previous=$main
     for output in $outputs; do
         if [[ ! $output =~ ^LVDS.*$ ]] && [[ ! $output =~ ^eDP.*$ ]]; then
-            scale=""
-            if [[ $output =~ ^DP-?[0-9]+ ]]; then
-                scale="--scale 1.5x1.5"
-            fi
-            if [[ $output =~ ^HDMI-?[0-9]+ ]]; then
-                scale="--scale 2x2"
-            fi
-            #echo "$output: auto (scale: $scale)"
-            #xrandr --output $output --auto --primary $scale --output $main --off
-            #echo "xrandr $output: auto (above $previous) $scale"
             if [ $previous = $main ]; then
                 echo "$output: --auto --primary $scale"
                 xrandr --output $output --auto --primary $scale
