@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+elevator_sound.sh elevator & disown
+
+sleep 0.1
+
+if $@; then
+    elevator_sound.sh elevator & disown
+else
+    elevator_sound.sh fail & disown
+fi
