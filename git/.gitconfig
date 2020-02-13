@@ -22,6 +22,9 @@
     wdiff = diff --color-words
     wshow = show --color-words
     lg = log --oneline --decorate --color --graph
+    ll = branch -av
+    pool = pull
+    poosh = push
 [merge]
     conflictstyle = diff3
 [mergetool]
