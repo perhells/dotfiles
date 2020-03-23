@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-device="FC:A8:9A:A2:BD:B7"
+device="$1"
 
 if bluetoothctl info "$device" | grep "Connected: yes" > /dev/null; then
     state="connected"
