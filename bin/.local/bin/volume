@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# You can call this script like this:
+# $./volume up
+# $./volume down
+# $./volume mute
+
+libnotify_id=1
+
+function get_volume {
+    pamixer --get-volume
+}
+
+function is_muted {
+    pamixer --get-mute
+}
+
+function send_notification {
+    volume=$(get_volume)
+    if [ $volume -eq "0" ]; then
+        icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-off.svg"
+    else
+        if [ $volume -lt "33" ]; then
+            icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-low.svg"
+        else
+            if [ $volume -lt "66" ]; then
+                icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-medium.svg"
+            else
+                icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-high.svg"
+            fi
+        fi
+    fi
+    if [ $volume -lt "10" ]; then
+        space="      "
+    else
+        if [ $volume -lt "100" ]; then
+            space="     "
+        else
+            space="    "
+        fi
+    fi
+    bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
+    dunstify -i "$icon_name" -r "$libnotify_id" "$volume$space$bar"
+}
+
+case $1 in
+    up)
+        pamixer -i 5
+        pamixer -u
+        send_notification
+        ;;
+    down)
+        pamixer -d 5
+        if [ "$(get_volume)" = "0" ]; then
+            pamixer -m
+        else
+            pamixer -u
+        fi
+        send_notification
+        ;;
+    max)
+        pamixer --set-volume 100
+        pamixer -u
+        send_notification
+        ;;
+    min)
+        pamixer --set-volume 0
+        pamixer -m
+        send_notification
+        ;;
+    mute)
+        pamixer --toggle-mute
+        if is_muted ; then
+            icon_name="/usr/share/icons/Faba/48x48/notifications/notification-audio-volume-off.svg"
+            dunstify -i "$icon_name" -r "$libnotify_id" "Muted"
+        else
+            send_notification
+        fi
+        ;;
+esac
