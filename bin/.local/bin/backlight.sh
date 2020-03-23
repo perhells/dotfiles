@@ -50,7 +50,7 @@ function send_notification {
         fi
     fi
     bar=$(seq -s "─" $(($brightness / 5)) | sed 's/[0-9]//g')
-    dunstify -i "$icon_name" -r "$libnotify_id" "$brightness$space$bar" 
+    dunstify -i "$icon_name" -r "$libnotify_id" "$brightness$space$bar"
 }
 
 case $1 in
