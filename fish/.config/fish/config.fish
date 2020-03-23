@@ -5,31 +5,6 @@ if status -l; and test -r /etc/locale.conf
     end </etc/locale.conf
 end
 
-if status is-interactive
-    switch $TERM
-        # Fix DEL key in st
-        case 'st*'
-            set -gx is_simple_terminal 1
-
-        case "linux"
-            set -e is_simple_terminal
-            function fish_prompt
-                fish_fallback_prompt
-            end
-    end
-
-    if set -q is_simple_terminal
-        tput smkx ^/dev/null
-        function fish_enable_keypad_transmit --on-event fish_postexec
-            tput smkx ^/dev/null
-        end
-
-        function fish_disable_keypad_transmit --on-event fish_preexec
-            tput rmkx ^/dev/null
-        end
-    end
-end
-
 # Change NPM path
 set NPM_BIN "$HOME/.npm-packages/bin"
 test -d "$NPM_BIN"; and set PATH $PATH $NPM_BIN
@@ -49,6 +24,11 @@ if test -d "$HOME/.local/bin";
     set PATH "$HOME/.local/bin" $PATH
 end
 
+# Fix delete in st
+if test "$TERM" = "st-256color";
+    tput smkx
+end
+
 # Add opam to path
 if type -q opam
     eval (opam env)
@@ -57,13 +37,6 @@ end
 # Auto completion for aws-cli
 if type -q aws_completer
     and complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
-end
-
-# start X at login
-if status --is-login && set -q DISPLAY && set -q XDG_VTNR
-    if test -z "$DISPLAY" -a $XDG_VTNR -eq 1
-        exec startx -- -keeptty
-    end
 end
 
 # Load aliases
@@ -98,7 +71,6 @@ end
 
 # Displays repository information if in a git folder
 function git_branch
-    #set -l git_branches (git branch -l ^/dev/null | sed -e "s/^\* //")
     set -l git_branches (git rev-parse --abbrev-ref HEAD ^/dev/null)
     set -l git_status (git status --porcelain ^/dev/null)
     set -l infocolor 4ca4b5
