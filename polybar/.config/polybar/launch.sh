@@ -29,8 +29,12 @@ else
 fi
 
 if type "xrandr" > /dev/null; then
-  TRAY_POS=right
   for MONITOR in $(xrandr --query | grep " connected" | sort | cut -d" " -f1); do
+    TRAY_POS=""
+    if xrandr | grep primary | grep $MONITOR > /dev/null; then
+      TRAY_POS="right"
+    fi
+
     echo "MONITOR=$MONITOR DPI=$DPI TRAY_POS=$TRAY_POS polybar --reload custom &"
     MONITOR=$MONITOR \
       DPI=$DPI \
@@ -39,7 +43,6 @@ if type "xrandr" > /dev/null; then
       LINESIZE=$LINESIZE \
       TRAY_POS=$TRAY_POS \
       polybar --reload custom &
-    TRAY_POS=""
   done
 else
   polybar --reload $bar &
