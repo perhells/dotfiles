@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Expected exactly one argument!"
+    exit 1
+fi
+
+if [ "$1" = "clear" ]; then
+    rm ~/.counter
+    echo ""
+else
+    if [ "$1" = "reset" ]; then
+        echo "0" > ~/.counter
+    else
+        count=0
+        if [ -f ~/.counter ]; then
+            count=$(cat ~/.counter)
+        fi
+        if [ "$1" = "increment" ]; then
+            count=$((count + 1))
+            echo "$count" > ~/.counter
+        else
+            if [ "$1" = "decrement" ]; then
+                count=$((count - 1))
+                echo "$count" > ~/.counter
+            else
+                if [ "$1" != "read" ]; then
+                    echo "Allowed arguments: [increment, decrement, reset, read]"
+                    exit 1
+                fi
+            fi
+        fi
+    fi
+    cat ~/.counter 2>/dev/null
+fi

@@ -175,10 +175,10 @@ bindsym $mod+m exec --no-startup-id mirror-screens.sh DVI-I-1
 bindsym $mod+Shift+m exec --no-startup-id mirror-screens.sh HDMI-0
 
 # Counter keys
-bindsym XF86Calculator exec --no-startup-id /home/per/counter.sh reset
-bindsym XF86Explorer exec --no-startup-id /home/per/counter.sh clear
-bindsym XF86Mail exec --no-startup-id /home/per/counter.sh decrement
-bindsym XF86HomePage exec --no-startup-id /home/per/counter.sh increment
+bindsym XF86Calculator exec --no-startup-id counter reset
+bindsym XF86Explorer exec --no-startup-id counter clear
+bindsym XF86Mail exec --no-startup-id counter decrement
+bindsym XF86HomePage exec --no-startup-id counter increment
 
 # Volume keys
 bindsym XF86AudioMute exec --no-startup-id volume mute

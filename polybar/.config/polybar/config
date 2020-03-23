@@ -126,7 +126,7 @@ interval = 0.1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.primary}
-exec = /home/per/counter.sh read
+exec = counter read
 format-underline = ${colors.primary}
 
 [module/solaar-keyboard]
