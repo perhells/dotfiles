@@ -85,9 +85,9 @@ bindsym $mod+s layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+Tab workspace next
-bindsym $alt+Tab workspace next
+#bindsym $alt+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $alt+Shift+Tab workspace prev
+#bindsym $alt+Shift+Tab workspace prev
 
 # Get new workspace
 bindsym $mod+n exec --no-startup-id newworkspace
@@ -173,14 +173,15 @@ mouse_warping none
 bindsym $mod+m exec --no-startup-id autoxrandr.sh
 
 # Volume keys
-bindsym XF86AudioMute exec --no-startup-id volume.sh mute
-bindsym XF86AudioLowerVolume  exec --no-startup-id volume.sh down
-bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh up
-bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id volume.sh min
-bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id volume.sh max
+bindsym XF86AudioMute exec --no-startup-id volume mute
+bindsym XF86AudioLowerVolume  exec --no-startup-id volume down
+bindsym XF86AudioRaiseVolume exec --no-startup-id volume up
+bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id volume min
+bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id volume max
 
 # bluetooth connection script
-bindsym $mod+b exec --no-startup-id tsa3118b_toggle.sh
+bindsym $mod+b exec --no-startup-id bluetooth_toggle.sh FC:A8:9A:A2:BD:B7
+bindsym $mod+Shift+b exec --no-startup-id bluetooth_toggle.sh CC:98:8B:99:FB:0D
 
 # pause/play/next/previous
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause

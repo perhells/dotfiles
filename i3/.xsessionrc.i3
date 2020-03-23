@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 runIfNotRunning() {
     pgrep -f $1 > /dev/null 2>&1 || $@
 }
@@ -57,8 +56,8 @@ fi
 # Disable sleep
 xset -display :0 s off -dpms
 
-# Compton must be restarted later, after running xrandr
-pkill compton
+# picom must be restarted later, after running xrandr
+pkill picom
 
 autoxrandr.sh
 ~/.fehbg
@@ -70,7 +69,22 @@ pkill dunst
 dunst -config "$DUNSTRC" &
 
 runIfNotRunning nm-applet &
-runIfNotRunning ~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
 
-# Restart compton
-compton --config ~/.config/compton.conf &
+kill $(pgrep -f autoname_workspaces)
+~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
+
+# Start alttab
+pkill alttab
+
+ALTTAB_TILE_WIDTH=$(printf "%0.0f" $(bc -l <<< "$DPI * 1.3"))
+ALTTAB_TILE_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 1.5"))
+ALTTAB_ICON_WIDTH=$(printf "%0.0f" $(bc -l <<< "$DPI * 1.3 - 1"))
+ALTTAB_ICON_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.75"))
+
+ALTTAB_TILE_GEOMETRY="${ALTTAB_TILE_WIDTH}x${ALTTAB_TILE_HEIGHT}"
+ALTTAB_ICON_GEOMETRY="${ALTTAB_ICON_WIDTH}x${ALTTAB_ICON_HEIGHT}"
+
+alttab -fg "#DFDFDF" -bg "#333333" -frame "#0A84FF" -t "$ALTTAB_TILE_GEOMETRY" -i "$ALTTAB_ICON_GEOMETRY" -d 1 &
+
+# Restart picom
+picom --config ~/.config/picom.conf &
