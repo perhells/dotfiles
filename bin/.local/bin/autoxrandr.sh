@@ -3,6 +3,23 @@ outputs=$(xrandr | grep '\Wconnected' | sort | awk '{ print $1 }')
 off_outputs=$(xrandr | grep '\Wdisconnected' | awk '{ print $1 }')
 outputcount=$(echo "$outputs" | wc -l)
 
+if [ "$#" -eq 1 ]; then
+    if [[ $outputs =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
+        echo "Using output: $1"
+        xrandr --output $1 --auto --scale 1x1 --primary
+        for output in $outputs; do
+            if [[ ! $output =~ ^$1$ ]]; then
+                echo "$output: off"
+                xrandr --output $output --off
+            fi
+        done
+        exit 0
+    else
+        echo "Could not find output $1!"
+        exit 1
+    fi
+fi
+
 for output in $outputs; do
     if [[ $output =~ ^LVDS.*$ ]] || [[ $output =~ ^eDP.*$ ]]; then
         main=$output
