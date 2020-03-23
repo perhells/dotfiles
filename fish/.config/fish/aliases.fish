@@ -41,9 +41,6 @@ function pdf; newworkspace zathura $argv &; end
 # Open files
 function open; command xdg-open $argv 2> /dev/null &; end
 
-# Runs and times a program in bash
-function time; bash -c "time $argv"; end
-
 # Quick and easy way to open a lot of links in chrome
 function open_all_chrome;
 while read f
