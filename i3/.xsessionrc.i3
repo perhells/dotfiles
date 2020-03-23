@@ -91,7 +91,7 @@ ALTTAB_TILE_GEOMETRY="${ALTTAB_TILE_WIDTH}x${ALTTAB_TILE_HEIGHT}"
 ALTTAB_ICON_GEOMETRY="${ALTTAB_ICON_WIDTH}x${ALTTAB_ICON_HEIGHT}"
 
 killall -q alttab
-alttab -fg "#DFDFDF" -bg "#333333" -frame "#0A84FF" -t "$ALTTAB_TILE_GEOMETRY" -i "$ALTTAB_ICON_GEOMETRY" -d 1 &
+alttab -fg "#DFDFDF" -bg "#222222" -frame "#0A84FF" -t "$ALTTAB_TILE_GEOMETRY" -i "$ALTTAB_ICON_GEOMETRY" -d 1 &
 
 # Picom
 picom --config ~/.config/picom.conf &
