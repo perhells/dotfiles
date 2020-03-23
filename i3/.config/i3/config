@@ -26,23 +26,22 @@ bindsym $mod+Ctrl+q exec --no-startup-id shutdown now
 # Reboot
 bindsym $mod+Ctrl+r exec --no-startup-id reboot
 
-# start a terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
-bindsym $mod+Shift+Return exec --no-startup-id newworkspace i3-sensible-terminal
+# Start a terminal
+bindsym $mod+Return exec --no-startup-id st
+bindsym $mod+Shift+Return exec --no-startup-id newworkspace st
 
-# kill focused window
+# Kill focused window
 bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
-# start dmenu (a program launcher)
+# Start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
 bindsym $mod+space exec --no-startup-id dmenu_run -fn "Office Code Pro Medium-12"
-# start i3-dmenu-desktop which only displays applications with .desktop files
+# Start i3-dmenu-desktop which only displays applications with .desktop files
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
-#bindsym Ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -fn "Office Code Pro Medium-12"'
 
-# start nautilus
-bindsym $mod+e exec --no-startup-id nautilus
+# Start nautilus
+bindsym $mod+e exec --no-startup-id nemo
 
 # change focus
 bindsym $mod+h focus left
@@ -85,9 +84,10 @@ bindsym $mod+s layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 bindsym $mod+Tab workspace next
-bindsym $alt+Tab workspace next
+#bindsym $alt+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
-bindsym $alt+Shift+Tab workspace prev
+#bindsym $alt+Shift+Tab workspace prev
+exec_always --no-startup-id alttab -fg "#DFDFDF" -bg "#222222" -frame "#0A84FF" -t 128x150 -i 127x64 -d 1
 
 # Get new workspace
 bindsym $mod+n exec --no-startup-id newworkspace
@@ -169,8 +169,15 @@ new_float none
 focus_follows_mouse no
 mouse_warping none
 
-# xrandr script
-bindsym $mod+m exec --no-startup-id autoxrandr.sh
+# Screen mirroring
+bindsym $mod+m exec --no-startup-id mirror-screens.sh DVI-I-1
+bindsym $mod+Shift+m exec --no-startup-id mirror-screens.sh HDMI-0
+
+# Counter keys
+bindsym XF86Calculator exec --no-startup-id /home/per/counter.sh reset
+bindsym XF86Explorer exec --no-startup-id /home/per/counter.sh clear
+bindsym XF86Mail exec --no-startup-id /home/per/counter.sh decrement
+bindsym XF86HomePage exec --no-startup-id /home/per/counter.sh increment
 
 # Volume keys
 bindsym XF86AudioMute exec --no-startup-id volume.sh mute
@@ -178,9 +185,6 @@ bindsym XF86AudioLowerVolume  exec --no-startup-id volume.sh down
 bindsym XF86AudioRaiseVolume exec --no-startup-id volume.sh up
 bindsym Shift+XF86AudioLowerVolume  exec --no-startup-id volume.sh min
 bindsym Shift+XF86AudioRaiseVolume  exec --no-startup-id volume.sh max
-
-# bluetooth connection script
-bindsym $mod+b exec --no-startup-id tsa3118b_toggle.sh
 
 # pause/play/next/previous
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
@@ -204,18 +208,20 @@ bindsym XF86KbdBrightnessDown exec --no-startup-id kb-light.py -
 # Touchpad
 bindsym XF86TouchpadToggle exec --no-startup-id touchpad_toggle.sh
 
-# scrot
+# Printscreen
 bindsym Print exec prntscr
 
-# scrot - select window or rectangle
+# Printscreen - select window or rectangle
 bindsym --release Shift+Print exec prntscr -s
 
 # If you want to add drama, press F13
 bindsym F13 exec --no-startup-id sound_effect.sh
 
+# nm-tui
 bindsym $mod+x exec --no-startup-id urxvt -geometry 60x30 -name floating -e nmtui-connect
 for_window [class="URxvt" instance="floating"] floating enable
 
+# Hemköp
 bindsym Ctrl+Shift+h exec --no-startup-id echo -n ":hk1::hk2::hk3::hk4::hk5::hk6:" | xclip -selection c
 
 # class                 border  backgr. text    indicator child_border
