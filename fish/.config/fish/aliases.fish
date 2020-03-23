@@ -8,6 +8,7 @@ function vi; command nvim $argv; end
 
 # Git
 function wow; git status; end
+function owo; git status; end
 function geet; git $argv; end
 function such; git $argv; end
 function very; git $argv; end
@@ -39,9 +40,6 @@ function pdf; newworkspace zathura $argv &; end
 
 # Open files
 function open; command xdg-open $argv 2> /dev/null &; end
-
-# Runs and times a program in bash
-function time; bash -c "time $argv"; end
 
 # Quick and easy way to open a lot of links in chrome
 function open_all_chrome;
@@ -132,4 +130,15 @@ function git-gone-clean; git branch -D (git-gone); end
 
 function ldapgroups
     ldapsearch -LLL -x -h ldap.dewire.com -b dc=dewire,dc=com member=uid=$argv[1],ou=people,dc=dewire,dc=com cn | grep "^cn:" | sed -e "s/^cn: //"
+end
+
+function counttests
+    set codecount (cat (find src -not -name "*test*")  2> /dev/null | wc -l)
+    set testcount (cat (find src -name "*test*")  2> /dev/null | wc -l)
+    set totalcount (echo "$codecount + $testcount" | bc)
+    set codepercentage (echo "scale=1; (10000 *  $codecount / $totalcount + 5) / 100" | bc)
+    set testpercentage (echo "scale=1; (10000 *  $testcount / $totalcount + 5) / 100" | bc)
+    echo -e "Code: \t$codecount ($codepercentage%)"
+    echo -e "Test: \t$testcount ($testpercentage%)"
+    echo -e "Total: \t$totalcount"
 end
