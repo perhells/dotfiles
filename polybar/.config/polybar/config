@@ -50,6 +50,10 @@ dpi = ${env:DPI:25}
 tray-maxsize = ${env:TRAYSIZE:25}
 line-size = ${env:LINESIZE:3}
 
+[bar/mirror]
+inherit = bar/default
+modules-left = i3-mirror
+
 [bar/default]
 width = 100%
 height = 25
@@ -82,8 +86,7 @@ font-3 = FontAwesome:size=10;2
 
 modules-left = i3
 modules-center = spotify
-modules-right = pulseaudio bluetooth-battery memory cpu temperature wlan eth battery date
-;modules-right = solaar-mouse solaar-keyboard pulseaudio memory cpu wlan eth battery date
+modules-right = counter pulseaudio bluetooth-battery memory cpu temperature wlan eth battery date
 
 tray-padding = 0
 
@@ -116,6 +119,15 @@ interval = 1
 format = <label>
 exec = spotify_status.py -p ',' -f '{play_pause} {artist}: {song}' -t 35 2>/dev/null
 format-underline = #1db954
+
+[module/counter]
+type = custom/script
+interval = 0.1
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.primary}
+exec = /home/per/counter.sh read
+format-underline = ${colors.primary}
 
 [module/solaar-keyboard]
 type = custom/script
@@ -178,23 +190,46 @@ label-urgent-background = ${colors.alert}
 label-urgent-underline = ${colors.alert-alt}
 label-urgent-padding = 2
 
-; Separator in between workspaces
-; label-separator = |
+[module/i3-mirror]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
 
+; Only show workspaces on the same output as the bar
+pin-workspaces = false
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+label-focused-underline = ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %name%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %name%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${colors.primary-alt}
+label-visible-padding = 2
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-underline = ${colors.alert-alt}
+label-urgent-padding = 2
 
 [module/mpd]
 type = internal/mpd
-;format-online = <label-song> <icon-prev> <icon-stop> <toggle> <icon-next>
 format-online =
 format-playing = <label-song>
 format-playing-underline = ${colors.secondary}
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
 label-song-maxlen = 35
 label-song-ellipsis = true
 
@@ -350,13 +385,7 @@ menu-2-0-exec = poweroff
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
 
 [global/wm]
 margin-top = 5
 margin-bottom = 5
-
-; vim:ft=dosini

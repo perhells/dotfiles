@@ -1,8 +1,4 @@
-#!/usr/bin/env bash
-
-runIfNotRunning() {
-    pgrep -f $1 > /dev/null 2>&1 || $@
-}
+#!/bin/bash
 
 if [ "$#" -eq 1 ]; then
   DPI=$1
@@ -16,29 +12,24 @@ fi
 
 LC_NUMERIC="en_US.UTF-8"
 
-DUNST_WIDTH=$(printf "%0.0f" $(bc -l <<< "$DPI * 3.4375"))
-DUNST_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.05208"))
-DUNST_OFFSET_X=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.15625"))
-DUNST_OFFSET_Y=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.41666"))
-
-DUNST_GEOMETRY="${DUNST_WIDTH}x${DUNST_HEIGHT}-${DUNST_OFFSET_X}+${DUNST_OFFSET_Y}"
-
 echo "Xft.dpi: $DPI" > .Xresources.custom
 
 xrdb -merge .Xresources.custom
 
-synclient HorizScrollDelta=-48
-synclient VertScrollDelta=-48
-synclient VertEdgeScroll=0
-synclient HorizEdgeScroll=0
-synclient VertTwoFingerScroll=1
-synclient HorizTwoFingerScroll=1
-synclient TapButton1=1
-synclient TapButton2=3
-synclient TapButton3=2
-synclient ClickFinger1=1
-synclient ClickFinger2=3
-synclient ClickFinger3=2
+if hash synclient 2> /dev/null; then
+    synclient HorizScrollDelta=-48
+    synclient VertScrollDelta=-48
+    synclient VertEdgeScroll=0
+    synclient HorizEdgeScroll=0
+    synclient VertTwoFingerScroll=1
+    synclient HorizTwoFingerScroll=1
+    synclient TapButton1=1
+    synclient TapButton2=3
+    synclient TapButton3=2
+    synclient ClickFinger1=1
+    synclient ClickFinger2=3
+    synclient ClickFinger3=2
+fi
 
 # Faster keyboard repeat rate
 xset r rate 250 50
@@ -56,26 +47,41 @@ fi
 # Disable sleep
 xset -display :0 s off -dpms
 
-# picom must be restarted later, after running xrandr
-pkill picom
+# Picom must be restarted later, after running xrandr
+killall -q picom
 
-autoxrandr.sh
+# Automatically set screen resolution
+if [ "$HOSTNAME" == "nemesis" ]; then
+  autoxrandr.sh DVI-I-1
+else
+  autoxrandr.sh
+fi
+
+# Set background
 ~/.fehbg
-~/.config/polybar/launch.sh $DPI &
 
+# Dunst
 DUNSTRC="$HOME/.config/dunst/dunstrc.$DPI"
+
+DUNST_WIDTH=$(printf "%0.0f" $(bc -l <<< "$DPI * 3.4375"))
+DUNST_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.05208"))
+DUNST_OFFSET_X=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.15625"))
+DUNST_OFFSET_Y=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.41666"))
+DUNST_GEOMETRY="${DUNST_WIDTH}x${DUNST_HEIGHT}-${DUNST_OFFSET_X}+${DUNST_OFFSET_Y}"
+
 sed -e "s/\${DUNST_GEOMETRY}/$DUNST_GEOMETRY/" ~/.config/dunst/dunstrc > "$DUNSTRC"
-pkill dunst
+
+killall -q dunst
 dunst -config "$DUNSTRC" &
 
-runIfNotRunning nm-applet &
+# Polybar
+~/.config/polybar/launch.sh $DPI &
 
-kill $(pgrep -f autoname_workspaces)
-~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
+# Network Manager Applet
+killall -q nm-applet
+nm-applet &
 
-# Start alttab
-pkill alttab
-
+# Alttab
 ALTTAB_TILE_WIDTH=$(printf "%0.0f" $(bc -l <<< "$DPI * 1.3"))
 ALTTAB_TILE_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 1.5"))
 ALTTAB_ICON_WIDTH=$(printf "%0.0f" $(bc -l <<< "$DPI * 1.3 - 1"))
@@ -84,7 +90,12 @@ ALTTAB_ICON_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.75"))
 ALTTAB_TILE_GEOMETRY="${ALTTAB_TILE_WIDTH}x${ALTTAB_TILE_HEIGHT}"
 ALTTAB_ICON_GEOMETRY="${ALTTAB_ICON_WIDTH}x${ALTTAB_ICON_HEIGHT}"
 
+killall -q alttab
 alttab -fg "#DFDFDF" -bg "#333333" -frame "#0A84FF" -t "$ALTTAB_TILE_GEOMETRY" -i "$ALTTAB_ICON_GEOMETRY" -d 1 &
 
-# Restart picom
+# Picom
 picom --config ~/.config/picom.conf &
+
+# Autoname workspaces
+kill $(pgrep -f autoname_workspaces.py)
+~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
