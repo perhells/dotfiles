@@ -171,8 +171,10 @@ focus_follows_mouse no
 mouse_warping none
 
 # Screen mirroring
-bindsym $mod+m exec --no-startup-id mirror-screens.sh DVI-I-1
-bindsym $mod+Shift+m exec --no-startup-id mirror-screens.sh HDMI-0
+#bindsym $mod+m exec --no-startup-id mirror-screens.sh DVI-I-1
+#bindsym $mod+Shift+m exec --no-startup-id mirror-screens.sh HDMI-0
+bindsym $mod+m exec --no-startup-id $HOME/.xsessionrc.display.i3 DVI-I-1
+bindsym $mod+Shift+m exec --no-startup-id $HOME/.xsessionrc.display.i3 HDMI-0
 
 # Counter keys
 bindsym XF86Calculator exec --no-startup-id counter reset
