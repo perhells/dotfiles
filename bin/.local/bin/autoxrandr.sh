@@ -50,11 +50,11 @@ if [ "$outputcount" -gt 1 ]; then
     for output in $outputs; do
         if [[ ! $output =~ ^LVDS.*$ ]] && [[ ! $output =~ ^eDP.*$ ]]; then
             if [ $previous = $main ]; then
-                echo "$output: --auto --primary $scale"
-                xrandr --output $output --auto --primary $scale
+                echo "$output: --auto --primary"
+                xrandr --output $output --auto --primary
             else
-                echo "$output: --auto --left-of $previous $scale"
-                xrandr --output $output --auto --left-of $previous $scale
+                echo "$output: --auto --left-of $previous"
+                xrandr --output $output --auto --left-of $previous
             fi
             previous=$output
         fi
