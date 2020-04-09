@@ -255,12 +255,12 @@ label = %percentage_used%%
 type = internal/network
 interface = wlp2s0
 interval = 1
+
+label-connected = %essid%
+format-connected = %{A1:toggle_dewire_vpn:}<label-connected>%{A}
+format-connected-underline = ${colors.primary}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-
-format-connected = <label-connected>
-format-connected-underline = ${colors.primary}
-label-connected = %essid%
 
 format-disconnected =
 
@@ -269,10 +269,11 @@ type = internal/network
 interface = enp4s0
 interval = 1
 
-format-connected-underline = ${colors.primary}
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
+format-connected = %{A1:toggle_dewire_vpn:}<label-connected>%{A}
+format-connected-underline = ${colors.primary}
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
 
 format-disconnected =
 
@@ -342,6 +343,8 @@ ramp-capacity-foreground = ${colors.foreground-alt}
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
+
+base-temperature = 20
 warn-temperature = 60
 
 format = <ramp> <label>

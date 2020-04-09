@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if nmcli con show --active | grep dewire-linux > /dev/null; then
+    echo "Dewire VPN is active - Inactivating!"
+    nmcli con down dewire-linux
+else
+    echo "Dewire VPN is inactive - Activating!"
+    nmcli con up dewire-linux
+fi
