@@ -37,6 +37,7 @@ bindsym $alt+F4 kill
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -i -fn "Office Code Pro Medium-12"
 bindsym $mod+space exec --no-startup-id dmenu_run -i -fn "Office Code Pro Medium-12"
+
 # start i3-dmenu-desktop which only displays applications with .desktop files
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -fn "Office Code Pro Medium-12"'
 
@@ -171,9 +172,7 @@ focus_follows_mouse no
 mouse_warping none
 
 # Screen mirroring
-#bindsym $mod+m exec --no-startup-id mirror-screens.sh DVI-I-1
-#bindsym $mod+Shift+m exec --no-startup-id mirror-screens.sh HDMI-0
-bindsym $mod+m exec --no-startup-id $HOME/.xsessionrc.display.i3 DVI-I-1
+bindsym $mod+m exec --no-startup-id $HOME/.xsessionrc.mirror.i3 1080p
 bindsym $mod+Shift+m exec --no-startup-id $HOME/.xsessionrc.display.i3 HDMI-0
 
 # Counter keys
