@@ -16,9 +16,7 @@ function many; git $argv; end
 function much; git $argv; end
 function so; git $argv; end
 
-# Connection
-function ssh; export TERM='xterm-256color'; command ssh $argv; export TERM='rxvt-unicode-256color'; end
-
+# SSH
 function ssh-agent; eval (command ssh-agent -c); end
 
 # Comfort
@@ -105,11 +103,11 @@ function p0; cat ~/.saved_folder0 2> /dev/null | xargs bash -c 'for filename; do
 function l0; cd (cat ~/.saved_folder0); end
 function r0; rm ~/.saved_folder0 2> /dev/null; end
 
-function exgrep; grep -v $argv[2] | grep $argv[1]; end
-
+# Copy/Paste
 function pbcopy; xclip -selection clipboard; end
 function pbpaste; xclip -selection clipboard -o; end
 
+# Copy "HEMKÖP"
 function hk
     set str ""
     for i in (seq 6)
@@ -119,6 +117,7 @@ function hk
     figlet Hemkop
 end
 
+# Find branches removed at origin
 function git-gone
     git fetch -p > /dev/null
     for branch in (git branch -vv --color=never | grep ': gone]' | awk '{print $1}')
@@ -126,12 +125,15 @@ function git-gone
     end
 end
 
+# Remove branches that has been removed at origin
 function git-gone-clean; git branch -D (git-gone); end
 
+# Get groups of LDAP user
 function ldapgroups
     ldapsearch -LLL -x -h ldap.dewire.com -b dc=dewire,dc=com member=uid=$argv[1],ou=people,dc=dewire,dc=com cn | grep "^cn:" | sed -e "s/^cn: //"
 end
 
+# Calculate percentage of test code
 function counttests
     set codecount (cat (find src -not -name "*test*")  2> /dev/null | wc -l)
     set testcount (cat (find src -name "*test*")  2> /dev/null | wc -l)
