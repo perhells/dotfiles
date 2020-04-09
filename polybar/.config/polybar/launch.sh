@@ -4,7 +4,7 @@ if [ "$#" -eq 1 ]; then
   DPI=$1
 else
   if [ "$HOSTNAME" == "caesium" ]; then
-    DPI=192
+    DPI=144
   else
     DPI=96
   fi
