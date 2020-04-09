@@ -52,7 +52,7 @@ killall -q picom
 
 # Automatically set screen resolution
 if [ "$HOSTNAME" == "nemesis" ]; then
-  autoxrandr.sh DVI-I-1
+  autoxrandr.sh DP-1
 else
   autoxrandr.sh
 fi
