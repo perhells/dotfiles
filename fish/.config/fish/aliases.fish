@@ -30,8 +30,23 @@ function geet; command git $argv; end
 function dots; command dot "$argv" -Tpng -o "$argv".png; feh "$argv".png; end
 
 # Shows sizes of directories
-function sizes; du -sch * 2> /dev/null | sort -h; end
-function ssizes; sudo du -sch * 2> /dev/null | sort -h; end
+function sizes
+    set originalPath (pwd)
+    if count $argv > /dev/null
+        cd $argv
+    end
+    du -sch (ls -A) 2> /dev/null | sort -h
+    cd $originalPath
+end
+
+function ssizes
+    set originalPath (pwd)
+    if count $argv > /dev/null
+        cd $argv
+    end
+    sudo du -sch (ls -A) 2> /dev/null | sort -h
+    cd $originalPath
+end
 
 # Opens PDF file on new workspace
 function pdf; newworkspace zathura $argv &; end
