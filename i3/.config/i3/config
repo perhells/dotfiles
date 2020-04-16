@@ -30,6 +30,9 @@ bindsym $mod+Ctrl+r exec --no-startup-id reboot
 bindsym $mod+Return exec --no-startup-id st
 bindsym $mod+Shift+Return exec --no-startup-id newworkspace st
 
+# Start an empty placeholder window
+bindsym $mod+p exec --no-startup-id i3 open
+
 # Kill focused window
 bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
