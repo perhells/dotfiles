@@ -5,9 +5,13 @@ if status -l; and test -r /etc/locale.conf
     end </etc/locale.conf
 end
 
-# Change NPM path
+# Add NPM bin dir
 set NPM_BIN "$HOME/.npm-packages/bin"
 test -d "$NPM_BIN"; and set PATH $PATH $NPM_BIN
+
+# Add Yarn bin dir
+set YARN_BIN "$HOME/.yarn/bin"
+test -d "$YARN_BIN"; and set PATH $PATH $YARN_BIN
 
 # Add bin dirs in program folders
 if test -d "$HOME/Programs";
