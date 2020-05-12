@@ -119,7 +119,7 @@ label-indicator-underline = ${colors.primary}
 type = custom/script
 interval = 1
 format = <label>
-exec = spotify_status.py -p ',' -f '{play_pause} {artist}: {song}' -t 35 2>/dev/null
+exec = spotify_status.py --trunclen 35 2>/dev/null
 format-underline = #1db954
 
 [module/counter]
