@@ -1,13 +1,5 @@
 #!/bin/bash
 
-killIfRunning () {
-  if pgrep $1; then
-    killall -q $1
-  else
-    echo "$1 is currently not running, skipping!"
-  fi
-}
-
 runIfNotRunning () {
   if pgrep $1; then
     echo "$1 is running, skipping!"
@@ -64,7 +56,7 @@ fi
 xset -display :0 s off -dpms
 
 # Picom must be restarted later, after running xrandr
-killIfRunning picom
+pkill picom
 
 # Automatically set screen resolution
 if [ "$HOSTNAME" == "nemesis" ]; then
@@ -87,14 +79,14 @@ DUNST_GEOMETRY="${DUNST_WIDTH}x${DUNST_HEIGHT}-${DUNST_OFFSET_X}+${DUNST_OFFSET_
 
 sed -e "s/\${DUNST_GEOMETRY}/$DUNST_GEOMETRY/" ~/.config/dunst/dunstrc > "$DUNSTRC"
 
-killIfRunning dunst
+pkill dunst
 dunst -config "$DUNSTRC" &
 
 # Polybar
 ~/.config/polybar/launch.sh $DPI &
 
 # Network Manager Applet
-killIfRunning nm-applet
+pkill nm-applet
 nm-applet &
 
 # Alttab
@@ -106,15 +98,20 @@ ALTTAB_ICON_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.75"))
 ALTTAB_TILE_GEOMETRY="${ALTTAB_TILE_WIDTH}x${ALTTAB_TILE_HEIGHT}"
 ALTTAB_ICON_GEOMETRY="${ALTTAB_ICON_WIDTH}x${ALTTAB_ICON_HEIGHT}"
 
-killIfRunning alttab
+pkill alttab
 alttab -fg "#DFDFDF" -bg "#222222" -frame "#0A84FF" -t "$ALTTAB_TILE_GEOMETRY" -i "$ALTTAB_ICON_GEOMETRY" -d 1 &
 
 # Picom
-picom --config ~/.config/picom.conf &
+if [ -f ~/.config/picom.conf ]; then
+  picom --config ~/.config/picom.conf &
+fi
 
 # Dropbox
 runIfNotRunning dropbox &
 
+# Optimus Manager Applet
+runIfNotRunning optimus-manager-qt &
+
 # Autoname workspaces
-kill $(pgrep -f autoname_workspaces.py)
+pkill -f autoname_workspaces.py
 ~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
