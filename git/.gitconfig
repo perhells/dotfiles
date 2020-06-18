@@ -34,3 +34,5 @@
 	name = Per Hellström
 [core]
 	editor = nvim
+[pull]
+	rebase = false
