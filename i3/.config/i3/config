@@ -165,9 +165,11 @@ bindsym $mod+r mode "resize"
 
 # Floating window classes
 for_window [title="RuneLite Launcher"] floating enable
+for_window [title="Microsoft Teams Notification"] floating enable
 for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
+for_window [class="feh"] floating enable
 
 new_window none
 new_float none

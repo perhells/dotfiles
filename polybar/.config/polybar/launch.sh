@@ -29,7 +29,9 @@ else
 fi
 
 if type "xrandr" > /dev/null; then
-  for MONITOR in $(xrandr --query | grep " connected" | sort | cut -d" " -f1); do
+  #grep " connected"
+  #grep "connected\(\s\w\+\)*[0-9]\+x[0-9]\++[0-9]\++[0-9]\+"
+  for MONITOR in $(xrandr --query | grep "connected\(\s\w\+\)*[0-9]\+x[0-9]\++[0-9]\++[0-9]\+" | sort | cut -d" " -f1); do
     TRAY_POS=""
     if xrandr | grep primary | grep $MONITOR > /dev/null; then
       TRAY_POS="right"
