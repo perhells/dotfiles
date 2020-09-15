@@ -231,6 +231,9 @@ bindsym F13 exec --no-startup-id sound_effect.sh
 bindsym $mod+x exec --no-startup-id urxvt -geometry 60x30 -name floating -e nmtui-connect
 for_window [class="URxvt" instance="floating"] floating enable
 
+# nm-tui
+bindsym $mod+v exec --no-startup-id pavucontrol
+
 # Hemköp
 bindsym Ctrl+Shift+h exec --no-startup-id echo -n ":hk1::hk2::hk3::hk4::hk5::hk6:" | xclip -selection c
 
