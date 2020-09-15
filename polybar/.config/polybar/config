@@ -16,6 +16,17 @@
 ;
 ;==========================================================
 
+[colors-bright-pink]
+background = #ffeeed
+background-alt = #ffc2c0
+foreground = #4a154b
+foreground-alt = #4a154b
+primary = #4a154b
+primary-alt = #053BBF
+secondary = #E60053
+alert = #BD2C40
+alert-alt = #6D2C10
+
 [colors]
 background = #222222
 background-alt = #444444
@@ -61,6 +72,7 @@ dpi = 96
 radius = 0
 fixed-center = true
 monitor = ${env:MONITOR:eDP-1}
+monitor-strict = true
 
 tray-position = ${env:TRAY_POS}
 

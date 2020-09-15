@@ -51,7 +51,5 @@ fi
 # xset r rate [delay] [speed]
 #xset r rate 250 40
 
-xbindkeys
-
 exec i3
 #exec $1

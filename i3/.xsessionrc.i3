@@ -115,3 +115,7 @@ runIfNotRunning optimus-manager-qt &
 # Autoname workspaces
 pkill -f autoname_workspaces.py
 ~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
+
+# xbindkeys
+pkill xbindkeys
+xbindkeys
