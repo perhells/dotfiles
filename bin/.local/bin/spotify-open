@@ -8,7 +8,7 @@ fi
 uri="$1"
 
 if pgrep spotify > /dev/null; then
-    echo "Opening: $uri" | tee -a spotify-open.log
+    echo "Opening: $uri" | tee -a ~/.spotify-open.log
     dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.OpenUri string:"$uri"
     wmctrl -x -a spotify
 else
