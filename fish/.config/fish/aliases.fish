@@ -61,12 +61,12 @@ while read f
 end < $argv; end
 
 # Handling of mirrorlist files for pacman
-function pacman-edit; sudo vim /etc/pacman.d/mirrorlist; end
-function pacnew-edit; sudo vim /etc/pacman.d/mirrorlist.pacnew; end
+function pacman-edit; sudo nvim /etc/pacman.d/mirrorlist; end
+function pacnew-edit; sudo nvim /etc/pacman.d/mirrorlist.pacnew; end
 function paccopy; sudo cp /etc/pacman.d/mirrorlist.pacnew /etc/pacman.d/mirrorlist; end
 function pacdiff;
     if test (count (diff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew)) -gt 0
-        vimdiff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew
+        diff /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacnew
     else
         echo "No difference between new and old mirrorlist"
     end;
