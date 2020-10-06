@@ -30,9 +30,9 @@
 [mergetool]
     prompt = false
 [user]
-	email = per.hellstrom@dewire.com
-	name = Per Hellström
+    email = per.hellstrom@knightec.se
+    name = Per Hellström
 [core]
-	editor = nvim
+    editor = nvim
 [pull]
-	rebase = false
+    rebase = false
