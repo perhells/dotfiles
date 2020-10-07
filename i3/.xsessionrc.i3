@@ -119,3 +119,6 @@ pkill -f autoname_workspaces.py
 # xbindkeys
 pkill xbindkeys
 xbindkeys
+
+# Check if dotfiles are up to date
+dotfiles_check

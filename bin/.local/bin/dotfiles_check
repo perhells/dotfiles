@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+libnotify_id=3
+
+if ! cd ~/dotfiles 2> /dev/null; then
+    icon_name="/usr/share/icons/Faba/48x48/status/folder-open.svg"
+    dunstify -t 60000 -i "$icon_name" -r "$libnotify_id" "Could not find ~/dotfiles!"
+    exit 1
+fi
+
+if git status | grep "Your branch is up to date with 'origin/" > /dev/null; then
+    if git status | grep "Changes" > /dev/null; then
+        icon_name="/usr/share/icons/Faba/48x48/status/folder-open.svg"
+        dunstify -t 60000 -i "$icon_name" -r "$libnotify_id" "Your dotfiles are not up to date!"
+        exit 0
+    else
+        icon_name="/usr/share/icons/Faba/48x48/status/folder-open.svg"
+        dunstify -i "$icon_name" -r "$libnotify_id" "Your dotfiles are up to date!"
+        exit 0
+    fi
+else
+    icon_name="/usr/share/icons/Faba/48x48/status/folder-open.svg"
+    dunstify -t 60000 -i "$icon_name" -r "$libnotify_id" "Your dotfiles are not up to date!"
+    exit 0
+fi
+
