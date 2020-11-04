@@ -78,45 +78,104 @@ function rA; r0; r1; r2; r3; r4; r5; r6; r7; r8; r9; end
 
 # Indivivual functions for saving directories
 function s1; pwd > ~/.saved_folder1; end
-function p1; cat ~/.saved_folder1 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 1: $filename"; done' bash; end
 function l1; cd (cat ~/.saved_folder1); end
+function p1
+    if test -e ~/.saved_folder1
+        set saved_folder1 (cat ~/.saved_folder1)
+        echo "Saved folder 1: $saved_folder1"
+    end
+end
 function r1; rm ~/.saved_folder1 2> /dev/null; end
+
 function s2; pwd > ~/.saved_folder2; end
-function p2; cat ~/.saved_folder2 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 2: $filename"; done' bash; end
 function l2; cd (cat ~/.saved_folder2); end
 function r2; rm ~/.saved_folder2 2> /dev/null; end
+function p2
+    if test -e ~/.saved_folder2
+        set saved_folder2 (cat ~/.saved_folder2)
+        echo "Saved folder 2: $saved_folder2"
+    end
+end
+
 function s3; pwd > ~/.saved_folder3; end
-function p3; cat ~/.saved_folder3 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 3: $filename"; done' bash; end
 function l3; cd (cat ~/.saved_folder3); end
 function r3; rm ~/.saved_folder3 2> /dev/null; end
+function p3
+    if test -e ~/.saved_folder3
+        set saved_folder3 (cat ~/.saved_folder3)
+        echo "Saved folder 3: $saved_folder3"
+    end
+end
+
 function s4; pwd > ~/.saved_folder4; end
-function p4; cat ~/.saved_folder4 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 4: $filename"; done' bash; end
 function l4; cd (cat ~/.saved_folder4); end
 function r4; rm ~/.saved_folder4 2> /dev/null; end
+function p4
+    if test -e ~/.saved_folder4
+        set saved_folder4 (cat ~/.saved_folder4)
+        echo "Saved folder 4: $saved_folder4"
+    end
+end
+
 function s5; pwd > ~/.saved_folder5; end
-function p5; cat ~/.saved_folder5 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 5: $filename"; done' bash; end
 function l5; cd (cat ~/.saved_folder5); end
 function r5; rm ~/.saved_folder5 2> /dev/null; end
+function p5
+    if test -e ~/.saved_folder5
+        set saved_folder5 (cat ~/.saved_folder5)
+        echo "Saved folder 5: $saved_folder5"
+    end
+end
+
 function s6; pwd > ~/.saved_folder6; end
-function p6; cat ~/.saved_folder6 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 6: $filename"; done' bash; end
 function l6; cd (cat ~/.saved_folder6); end
 function r6; rm ~/.saved_folder6 2> /dev/null; end
+function p6
+    if test -e ~/.saved_folder6
+        set saved_folder6 (cat ~/.saved_folder6)
+        echo "Saved folder 6: $saved_folder6"
+    end
+end
+
 function s7; pwd > ~/.saved_folder7; end
-function p7; cat ~/.saved_folder7 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 7: $filename"; done' bash; end
 function l7; cd (cat ~/.saved_folder7); end
 function r7; rm ~/.saved_folder7 2> /dev/null; end
+function p7
+    if test -e ~/.saved_folder7
+        set saved_folder7 (cat ~/.saved_folder7)
+        echo "Saved folder 7: $saved_folder7"
+    end
+end
+
 function s8; pwd > ~/.saved_folder8; end
-function p8; cat ~/.saved_folder8 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 8: $filename"; done' bash; end
 function l8; cd (cat ~/.saved_folder8); end
 function r8; rm ~/.saved_folder8 2> /dev/null; end
+function p8
+    if test -e ~/.saved_folder8
+        set saved_folder8 (cat ~/.saved_folder8)
+        echo "Saved folder 8: $saved_folder8"
+    end
+end
+
 function s9; pwd > ~/.saved_folder9; end
-function p9; cat ~/.saved_folder9 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 9: $filename"; done' bash; end
 function l9; cd (cat ~/.saved_folder9); end
 function r9; rm ~/.saved_folder9 2> /dev/null; end
+function p9
+    if test -e ~/.saved_folder9
+        set saved_folder9 (cat ~/.saved_folder9)
+        echo "Saved folder 9: $saved_folder9"
+    end
+end
+
 function s0; pwd > ~/.saved_folder0; end
-function p0; cat ~/.saved_folder0 2> /dev/null | xargs bash -c 'for filename; do echo "Saved folder 0: $filename"; done' bash; end
 function l0; cd (cat ~/.saved_folder0); end
 function r0; rm ~/.saved_folder0 2> /dev/null; end
+function p0
+    if test -e ~/.saved_folder0
+        set saved_folder0 (cat ~/.saved_folder0)
+        echo "Saved folder 0: $saved_folder0"
+    end
+end
 
 # Copy/Paste
 function pbcopy; xclip -selection clipboard; end
