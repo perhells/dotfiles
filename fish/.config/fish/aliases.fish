@@ -163,3 +163,23 @@ end
 function nvidia-run
     __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME="nvidia" __VK_LAYER_NV_optimus="NVIDIA_only" $argv
 end
+
+function devices; bluetoothctl devices; end
+
+function connect
+    set device_id (bluetoothctl devices | grep "$argv" | awk '{print $2}')
+    if [ "$device_id" != '' ]
+        bluetoothctl connect $device_id
+    else
+        echo -e "No device called \"$argv\" found!"
+    end
+end
+
+function disconnect
+    set device_id (bluetoothctl devices | grep "$argv" | awk '{print $2}')
+    if [ "$device_id" != '' ]
+        bluetoothctl disconnect $device_id
+    else
+        echo -e "No device called \"$argv\" found!"
+    end
+end
