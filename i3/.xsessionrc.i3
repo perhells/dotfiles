@@ -11,11 +11,12 @@ runIfNotRunning () {
 if [ "$#" -eq 1 ]; then
   DPI=$1
 else
-  if [ "$HOSTNAME" == "caesium" ]; then
-    DPI=144
-  else
-    DPI=96
-  fi
+  DPI=144
+  #if [ "$HOSTNAME" == "caesium" ]; then
+  #  DPI=144
+  #else
+  #  DPI=96
+  #fi
 fi
 
 LC_NUMERIC="en_US.UTF-8"
