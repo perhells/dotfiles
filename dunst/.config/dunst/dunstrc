@@ -5,7 +5,7 @@
 #### Display ####
 monitor = 0
 geometry = ${DUNST_GEOMETRY}
-timeout = 3
+timeout = 6
 #geometry = "330x5-15+40"
 #geometry = "495x8-23+60"
 #geometry = "660x10-30+80"
