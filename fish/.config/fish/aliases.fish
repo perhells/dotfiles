@@ -246,3 +246,7 @@ function disconnect
 end
 
 complete -x -c disconnect -a "(devices)"
+
+function decode
+    echo "$argv" | base64 -di 2>/dev/null
+end
