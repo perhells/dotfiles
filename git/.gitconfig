@@ -25,6 +25,7 @@
     ll = branch -av
     pool = pull
     poosh = push
+    df = diff --ws-error-highlight=all
 [merge]
     conflictstyle = diff3
 [mergetool]
