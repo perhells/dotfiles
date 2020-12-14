@@ -78,7 +78,7 @@ DUNST_OFFSET_X=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.15625"))
 DUNST_OFFSET_Y=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.41666"))
 DUNST_GEOMETRY="${DUNST_WIDTH}x${DUNST_HEIGHT}-${DUNST_OFFSET_X}+${DUNST_OFFSET_Y}"
 
-sed -e "s/\${DUNST_GEOMETRY}/$DUNST_GEOMETRY/" ~/.config/dunst/dunstrc > "$DUNSTRC"
+sed -e "s/\${DUNST_GEOMETRY}/$DUNST_GEOMETRY/" ~/.config/dunst/dunstrc.custom > "$DUNSTRC"
 
 pkill dunst
 dunst -config "$DUNSTRC" &
