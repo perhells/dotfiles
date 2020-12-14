@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+if ifconfig | grep tun0 > /dev/null; then
+    echo ""
+fi

@@ -100,7 +100,7 @@ font-5 = Font Awesome 5 Brands:size=10;2
 
 modules-left = i3
 modules-center = spotify
-modules-right = counter pulseaudio bluetooth-battery memory cpu temperature wlan eth battery date
+modules-right = counter pulseaudio bluetooth-battery memory cpu temperature vpn wlan eth battery date
 
 tray-padding = 0
 
@@ -136,11 +136,18 @@ format-underline = #1db954
 
 [module/counter]
 type = custom/script
-interval = 0.1
+interval = 1
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.primary}
 exec = counter read
+format-underline = ${colors.primary}
+
+[module/vpn]
+type = custom/script
+interval = 3
+exec = check_vpn
+format-foreground = ${colors.foreground-alt}
 format-underline = ${colors.primary}
 
 [module/solaar-keyboard]
