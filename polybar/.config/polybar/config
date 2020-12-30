@@ -272,7 +272,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = ${env:WLAN_INTERFACE:wlp2s0}
 interval = 1
 
 label-connected = %essid%
@@ -285,10 +285,10 @@ format-disconnected =
 
 [module/eth]
 type = internal/network
-interface = enp4s0
+interface = ${env:ETH_INTERFACE:enp4s0}
 interval = 1
 
-label-connected = %local_ip%
+label-connected = Wired %linkspeed%
 format-connected = %{A1:toggle_dewire_vpn:}<label-connected>%{A}
 format-connected-underline = ${colors.primary}
 format-connected-prefix = " "
