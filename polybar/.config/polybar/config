@@ -147,7 +147,9 @@ format-underline = ${colors.primary}
 type = custom/script
 interval = 3
 exec = check_vpn
-format-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.primary}
 format-underline = ${colors.primary}
 
 [module/solaar-keyboard]
