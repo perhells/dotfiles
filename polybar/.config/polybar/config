@@ -291,7 +291,7 @@ interface = ${env:ETH_INTERFACE:enp4s0}
 interval = 1
 
 label-connected = Wired %linkspeed%
-format-connected = %{A1:toggle_dewire_vpn:}<label-connected>%{A}
+format-connected = %{A1:toggle_dewire_vpn:}%{A3:pulseUi:}<label-connected>%{A}%{A}
 format-connected-underline = ${colors.primary}
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
