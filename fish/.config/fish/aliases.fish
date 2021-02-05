@@ -254,3 +254,9 @@ end
 function timestamps
     ts '[%Y-%m-%d %H:%M:%S]'
 end
+
+function list_sensors
+    for i in /sys/class/thermal/thermal_zone*
+        echo $i: (cat $i/type)
+    end
+end
