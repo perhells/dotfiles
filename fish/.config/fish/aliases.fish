@@ -260,3 +260,7 @@ function list_sensors
         echo $i: (cat $i/type)
     end
 end
+
+function figsay
+    echo "$argv" | figlet | cowsay -n
+end
