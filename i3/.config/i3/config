@@ -245,6 +245,9 @@ bindsym $mod+v exec --no-startup-id pavucontrol
 # Hemköp
 bindsym Ctrl+Shift+h exec --no-startup-id echo -n ":hk1::hk2::hk3::hk4::hk5::hk6:" | xclip -selection c
 
+# ™
+bindsym Ctrl+Shift+t exec --no-startup-id echo -n "™" | xclip -selection c
+
 # class                 border  backgr. text    indicator child_border
 client.focused          #444444 #444444 #ffffff #2e9ef4   #444444
 client.focused_inactive #222222 #222222 #ffffff #222222   #222222
