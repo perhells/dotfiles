@@ -176,6 +176,7 @@ for_window [class="Solaar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="pulseUi"] floating enable
 
 new_window none
 new_float none
