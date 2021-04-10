@@ -183,9 +183,8 @@ new_float none
 focus_follows_mouse no
 mouse_warping none
 
-# Screen mirroring
-bindsym $mod+m exec --no-startup-id $HOME/.xsessionrc.mirror.i3 1080p
-bindsym $mod+Shift+m exec --no-startup-id $HOME/.xsessionrc.display.i3 HDMI-0
+# External monitor
+bindsym $mod+m exec --no-startup-id $HOME/.xsessionrc.i3 -m HDMI-0
 
 # Counter keys
 bindsym XF86Calculator exec --no-startup-id counter reset
@@ -262,6 +261,6 @@ client.background       #ffffff
 exec_always --no-startup-id $HOME/.xsessionrc.i3
 
 # Run xsessionrc
-bindsym $mod+F5 exec --no-startup-id $HOME/.xsessionrc.i3 192
-bindsym $mod+F6 exec --no-startup-id $HOME/.xsessionrc.i3 144
-bindsym $mod+F7 exec --no-startup-id $HOME/.xsessionrc.i3 96
+bindsym $mod+F5 exec --no-startup-id $HOME/.xsessionrc.i3 -d 192
+bindsym $mod+F6 exec --no-startup-id $HOME/.xsessionrc.i3 -d 144
+bindsym $mod+F7 exec --no-startup-id $HOME/.xsessionrc.i3 -d 96

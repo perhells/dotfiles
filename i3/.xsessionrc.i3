@@ -1,23 +1,38 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+OPTIND=1
+DPI=144
+while getopts "d:m:" opt; do
+    case "$opt" in
+    d)  DPI=$OPTARG
+        ;;
+    m)  MONITOR=$OPTARG
+        ;;
+    esac
+done
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+
+echo "MONITOR=$MONITOR"
+echo "DPI=$DPI"
 
 runIfNotRunning () {
   if pgrep $1; then
-    echo "$1 is running, skipping!"
+    echo "Process \"$1\" is running, skipping!"
   else
-    $@
+    if which $1 2> /dev/null; then
+      $@
+    else
+      echo "Command \"$1\" not found, skipping!"
+    fi
   fi
 }
 
-if [ "$#" -eq 1 ]; then
-  DPI=$1
-else
-  DPI=144
-  #if [ "$HOSTNAME" == "caesium" ]; then
-  #  DPI=144
-  #else
-  #  DPI=96
-  #fi
-fi
+killIfRunning () {
+  if ! pkill $1; then
+    echo "Process \"$1\" not found, skipping!"
+  fi
+}
 
 LC_NUMERIC="en_US.UTF-8"
 
@@ -42,14 +57,10 @@ fi
 xset -display :0 s off -dpms
 
 # Picom must be restarted later, after running xrandr
-pkill picom
+killIfRunning picom
 
 # Automatically set screen resolution
-if [ "$HOSTNAME" == "nemesis" ]; then
-  autoxrandr.sh DP-1
-else
-  autoxrandr.sh
-fi
+autoxrandr.sh $MONITOR
 
 # Set background
 ~/.fehbg
@@ -65,14 +76,14 @@ DUNST_GEOMETRY="${DUNST_WIDTH}x${DUNST_HEIGHT}-${DUNST_OFFSET_X}+${DUNST_OFFSET_
 
 sed -e "s/\${DUNST_GEOMETRY}/$DUNST_GEOMETRY/" ~/.config/dunst/dunstrc.custom > "$DUNSTRC"
 
-pkill dunst
+killIfRunning dunst
 dunst -config "$DUNSTRC" &
 
 # Polybar
 ~/.config/polybar/launch.sh $DPI &
 
 # Network Manager Applet
-pkill nm-applet
+killIfRunning nm-applet
 nm-applet &
 
 # Alttab
@@ -84,7 +95,7 @@ ALTTAB_ICON_HEIGHT=$(printf "%0.0f" $(bc -l <<< "$DPI * 0.75"))
 ALTTAB_TILE_GEOMETRY="${ALTTAB_TILE_WIDTH}x${ALTTAB_TILE_HEIGHT}"
 ALTTAB_ICON_GEOMETRY="${ALTTAB_ICON_WIDTH}x${ALTTAB_ICON_HEIGHT}"
 
-pkill alttab
+killIfRunning alttab
 alttab -fg "#DFDFDF" -bg "#222222" -frame "#0A84FF" -t "$ALTTAB_TILE_GEOMETRY" -i "$ALTTAB_ICON_GEOMETRY" -d 1 &
 
 # Picom
@@ -99,11 +110,11 @@ runIfNotRunning dropbox &
 runIfNotRunning optimus-manager-qt &
 
 # Autoname workspaces
-pkill -f autoname_workspaces.py
+killIfRunning autoname_workspaces.py
 ~/.config/i3/i3scripts/autoname_workspaces.py --norenumber_workspaces &
 
 # xbindkeys
-pkill xbindkeys
+killIfRunning xbindkeys
 xbindkeys
 
 # Check if dotfiles are up to date
