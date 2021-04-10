@@ -3,6 +3,7 @@ outputs=$(xrandr | grep '\Wconnected' | sort | awk '{ print $1 }')
 off_outputs=$(xrandr | grep '\Wdisconnected' | awk '{ print $1 }')
 outputcount=$(echo "$outputs" | wc -l)
 
+# Specific output
 if [ "$#" -eq 1 ]; then
     if [[ $outputs =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
         echo "Using output: $1"
@@ -20,13 +21,7 @@ if [ "$#" -eq 1 ]; then
     fi
 fi
 
-for output in $outputs; do
-    if [[ $output =~ ^LVDS.*$ ]] || [[ $output =~ ^eDP.*$ ]]; then
-        main=$output
-        break
-    fi
-done
-
+# Mobprog
 if [[ $outputs =~ (^|[[:space:]])"DVI-I-1-1"($|[[:space:]]) ]] && [[ $outputs =~ (^|[[:space:]])"DVI-I-2-2"($|[[:space:]]) ]]; then
     echo "Mobprog detected, using preset!"
     for output in $outputs; do
@@ -43,36 +38,48 @@ if [[ $outputs =~ (^|[[:space:]])"DVI-I-1-1"($|[[:space:]]) ]] && [[ $outputs =~
     exit 0
 fi
 
-if [ "$outputcount" -gt 1 ]; then
-    echo "$main: off"
-    xrandr --output $main --off
-    previous=$main
+# Prioritization
+main=""
+for output in $outputs; do
+    if [[ $output =~ ^LVDS.*$ ]]; then
+        main=$output
+        break
+    fi
+done
+for output in $outputs; do
+    if [[ $output =~ ^eDP.*$ ]]; then
+        main=$output
+        break
+    fi
+done
+for output in $outputs; do
+    if [[ $output = "DP-1" ]]; then
+        main=$output
+        break
+    fi
+done
+
+if [[ $main != "" ]]; then
+    echo "Main output found: $main"
+    xrandr --output $main --auto --scale 1x1 --primary
     for output in $outputs; do
-        if [[ ! $output =~ ^LVDS.*$ ]] && [[ ! $output =~ ^eDP.*$ ]]; then
-            if [ $previous = $main ]; then
-                echo "$output: --auto --primary"
-                xrandr --output $output --auto --primary
-            else
-                echo "$output: --auto --left-of $previous"
-                xrandr --output $output --auto --left-of $previous
-            fi
-            previous=$output
-        fi
-    done
-    for output in $off_outputs; do
-        echo "$output: off"
-        xrandr --output $output --off
-    done
-else
-    if [ "$main" != "" ]; then
-        echo "$main: auto primary"
-        xrandr --output $main --auto --primary
-        for output in $off_outputs; do
+        if [[ ! $output =~ ^$main$ ]]; then
             echo "$output: off"
             xrandr --output $output --off
-        done
-    else
-        echo "Couldn't find any output starting with \"LVDS\" or eDP!"
-        exit 1
-    fi
+        fi
+    done
+    exit 0
+else
+    echo "No main output found, using all possible monitors"
+    previous=$main
+    for output in $outputs; do
+        if [[ $previous = "" ]]; then
+            echo "$output: --auto --primary"
+            xrandr --output $output --auto --primary
+        else
+            echo "$output: --auto --right-of $previous"
+            xrandr --output $output --auto --right-of $previous
+        fi
+        previous=$output
+    done
 fi
