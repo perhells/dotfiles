@@ -15,6 +15,7 @@ function very; git $argv; end
 function many; git $argv; end
 function much; git $argv; end
 function so; git $argv; end
+function ...; cd (git rev-parse --show-toplevel); end
 
 # SSH
 function ssh-agent; eval (command ssh-agent -c); end
