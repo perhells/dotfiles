@@ -16,17 +16,6 @@
 ;
 ;==========================================================
 
-[colors-bright-pink]
-background = #ffeeed
-background-alt = #ffc2c0
-foreground = #4a154b
-foreground-alt = #4a154b
-primary = #4a154b
-primary-alt = #053BBF
-secondary = #E60053
-alert = #BD2C40
-alert-alt = #6D2C10
-
 [colors]
 background = #222222
 background-alt = #444444
@@ -38,37 +27,12 @@ secondary = #E60053
 alert = #BD2C40
 alert-alt = #6D2C10
 
-[colors-original]
-background = #DFDFDF
-background-alt = #CCC
-foreground = #333
-foreground-alt = #444
-primary = #2BBFEC
-secondary = #E60053
-alert = #BD2C40
-
-[bar/4k]
-inherit = bar/default
-height = 50
-dpi = 192
-tray-maxsize = 32
-line-size = 6
-
-[bar/custom]
-inherit = bar/default
+[bar/default]
+width = 100%
 height = ${env:HEIGHT:25}
 dpi = ${env:DPI:25}
 tray-maxsize = ${env:TRAYSIZE:25}
 line-size = ${env:LINESIZE:3}
-
-[bar/mirror]
-inherit = bar/default
-modules-left = i3-mirror
-
-[bar/default]
-width = 100%
-height = 25
-dpi = 96
 radius = 0
 fixed-center = true
 monitor = ${env:MONITOR:eDP-1}
@@ -79,7 +43,6 @@ tray-position = ${env:TRAY_POS}
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
 line-color = #f00
 
 border-size = 0
@@ -186,41 +149,6 @@ wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %name%
-label-focused-background = ${colors.background-alt}
-label-focused-underline = ${colors.primary}
-label-focused-padding = 2
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
-label-unfocused-padding = 2
-
-; visible = Active workspace on unfocused monitor
-label-visible = %name%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${colors.primary-alt}
-label-visible-padding = 2
-
-; urgent = Workspace with urgency hint set
-label-urgent = %name%
-label-urgent-background = ${colors.alert}
-label-urgent-underline = ${colors.alert-alt}
-label-urgent-padding = 2
-
-[module/i3-mirror]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-; Only show workspaces on the same output as the bar
-pin-workspaces = false
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -363,7 +291,7 @@ ramp-capacity-foreground = ${colors.foreground-alt}
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 10
+thermal-zone = ${env:THERMAL_ZONE:0}
 
 base-temperature = 20
 warn-temperature = 60
@@ -383,31 +311,6 @@ ramp-2 = 
 ramp-3 = 
 ramp-4 = 
 ramp-foreground = ${colors.foreground-alt}
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close = cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = reboot
-menu-1-0-exec = reboot
-
-menu-2-0 = power off
-menu-2-0-exec = poweroff
 
 [settings]
 screenchange-reload = true
