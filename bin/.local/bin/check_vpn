@@ -3,13 +3,13 @@
 set -e
 
 if ifconfig | grep tun0 > /dev/null; then
-    if ifconfig | grep tap0 > /dev/null; then
+    if ifconfig | grep ppp0 > /dev/null; then
         echo "Both VPNs active"
     else
         echo "External VPN active"
     fi
 else
-    if ifconfig | grep tap0 > /dev/null; then
+    if ifconfig | grep ppp0 > /dev/null; then
         echo "Internal VPN active"
     fi
 fi
