@@ -1,0 +1,13 @@
+{
+    "window.menuBarVisibility": "toggle",
+    "workbench.tree.indent": 16,
+    "files.trimTrailingWhitespace": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.compactFolders": false,
+    "rest-client.requestNameAsResponseTabTitle": true,
+    "rest-client.rememberCookiesForSubsequentRequests": false,
+    "rest-client.decodeEscapedUnicodeCharacters": true,
+    "rest-client.previewOption": "exchange",
+    "rest-client.previewResponsePanelTakeFocus": false,
+    "editor.tabSize": 2
+}
