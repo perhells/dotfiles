@@ -104,7 +104,7 @@ function fish_prompt
     set_color $delimcolor
     echo -n "@"
     set_color $infocolor
-    echo -n (hostname)
+    echo -n $hostname
     set_color $pathcolor
     echo -n " "(prompt_dir)" "
     set_color $delimcolor
