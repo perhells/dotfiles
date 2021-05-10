@@ -2,6 +2,11 @@
 
 set -e
 
+if ! command -v ifconfig &> /dev/null; then
+    echo "Command ifconfig not found"
+    exit
+fi
+
 if ifconfig | grep tun0 > /dev/null; then
     if ifconfig | grep ppp0 > /dev/null; then
         echo "Both VPNs active"
