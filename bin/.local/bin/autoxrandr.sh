@@ -58,6 +58,12 @@ for output in $outputs; do
         break
     fi
 done
+for output in $outputs; do
+    if [[ $output = "DP2" ]]; then
+        main=$output
+        break
+    fi
+done
 
 if [[ $main != "" ]]; then
     echo "Main output found: $main"
