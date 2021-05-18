@@ -104,7 +104,15 @@ if [ -f ~/.config/picom.conf ]; then
 fi
 
 # Dropbox
-runIfNotRunning dropbox &
+if pgrep dropbox; then
+  echo "Process \"dropbox\" is running, skipping!"
+else
+  if which dropbox 2> /dev/null; then
+    DISPLAY= dropbox start -i &
+  else
+    echo "Command \"dropbox\" not found, skipping!"
+  fi
+fi
 
 # Optimus Manager Applet
 runIfNotRunning optimus-manager-qt &
