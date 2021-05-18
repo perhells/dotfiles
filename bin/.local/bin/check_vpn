@@ -7,14 +7,14 @@ if ! command -v ifconfig &> /dev/null; then
     exit
 fi
 
-if ifconfig | grep tun0 > /dev/null; then
-    if ifconfig | grep ppp0 > /dev/null; then
+if ifconfig 2> /dev/null | grep tun0 > /dev/null; then
+    if ifconfig 2> /dev/null | grep ppp0 > /dev/null; then
         echo "Both VPNs active"
     else
         echo "External VPN active"
     fi
 else
-    if ifconfig | grep ppp0 > /dev/null; then
+    if ifconfig 2> /dev/null | grep ppp0 > /dev/null; then
         echo "Internal VPN active"
     fi
 fi
