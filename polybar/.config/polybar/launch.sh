@@ -29,7 +29,7 @@ echo "Thermal zone: $THERMAL_ZONE"
 
 # Launch Polybar, using default config location ~/.config/polybar/config
 if type "xrandr" > /dev/null; then
-  for MONITOR in $(xrandr --query | grep "connected\(\s\w\+\)*[0-9]\+x[0-9]\++[0-9]\++[0-9]\+" | sort | cut -d" " -f1); do
+  for MONITOR in $(xrandr --query | grep "\sconnected\(\s\w\+\)*[0-9]\+x[0-9]\++[0-9]\++[0-9]\+" | sort | cut -d" " -f1); do
     TRAY_POS=""
     if xrandr | grep primary | grep $MONITOR > /dev/null; then
       TRAY_POS="right"

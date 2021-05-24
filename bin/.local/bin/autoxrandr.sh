@@ -1,14 +1,14 @@
 #!/bin/bash
-outputs=$(xrandr | grep '\Wconnected' | sort | awk '{ print $1 }')
+connected_outputs=$(xrandr | grep '\Wconnected' | sort | awk '{ print $1 }')
 off_outputs=$(xrandr | grep '\Wdisconnected' | awk '{ print $1 }')
-outputcount=$(echo "$outputs" | wc -l)
+outputcount=$(echo "$connected_outputs" | wc -l)
 
 # Specific output
 if [ "$#" -eq 1 ]; then
-    if [[ $outputs =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
+    if [[ $connected_outputs =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
         echo "Using output: $1"
         xrandr --output $1 --auto --scale 1x1 --primary
-        for output in $outputs; do
+        for output in $connected_outputs; do
             if [[ ! $output =~ ^$1$ ]]; then
                 echo "$output: off"
                 xrandr --output $output --off
@@ -22,9 +22,9 @@ if [ "$#" -eq 1 ]; then
 fi
 
 # Mobprog
-if [[ $outputs =~ (^|[[:space:]])"DVI-I-1-1"($|[[:space:]]) ]] && [[ $outputs =~ (^|[[:space:]])"DVI-I-2-2"($|[[:space:]]) ]]; then
+if [[ $connected_outputs =~ (^|[[:space:]])"DVI-I-1-1"($|[[:space:]]) ]] && [[ $connected_outputs =~ (^|[[:space:]])"DVI-I-2-2"($|[[:space:]]) ]]; then
     echo "Mobprog detected, using preset!"
-    for output in $outputs; do
+    for output in $connected_outputs; do
         if [[ ! $output =~ ^DVI.*$ ]]; then
             echo "$output: off"
             xrandr --output $output --off
@@ -40,26 +40,38 @@ fi
 
 # Prioritization
 main=""
-for output in $outputs; do
-    if [[ $output =~ ^LVDS.*$ ]]; then
+for output in $connected_outputs; do
+    if [[ $output =~ ^LVDS.* ]]; then
         main=$output
         break
     fi
 done
-for output in $outputs; do
-    if [[ $output =~ ^eDP.*$ ]]; then
+for output in $connected_outputs; do
+    if [[ $output =~ ^eDP.* ]]; then
         main=$output
         break
     fi
 done
-for output in $outputs; do
+for output in $connected_outputs; do
     if [[ $output = "DP-1" ]]; then
         main=$output
         break
     fi
 done
-for output in $outputs; do
+for output in $connected_outputs; do
+    if [[ $output = "DP1" ]]; then
+        main=$output
+        break
+    fi
+done
+for output in $connected_outputs; do
     if [[ $output = "DP2" ]]; then
+        main=$output
+        break
+    fi
+done
+for output in $connected_outputs; do
+    if [[ $output = "DP3" ]]; then
         main=$output
         break
     fi
@@ -68,7 +80,7 @@ done
 if [[ $main != "" ]]; then
     echo "Main output found: $main"
     xrandr --output $main --auto --scale 1x1 --primary
-    for output in $outputs; do
+    for output in $connected_outputs; do
         if [[ ! $output =~ ^$main$ ]]; then
             echo "$output: off"
             xrandr --output $output --off
@@ -78,7 +90,7 @@ if [[ $main != "" ]]; then
 else
     echo "No main output found, using all possible monitors"
     previous=$main
-    for output in $outputs; do
+    for output in $connected_outputs; do
         if [[ $previous = "" ]]; then
             echo "$output: --auto --primary"
             xrandr --output $output --auto --primary
