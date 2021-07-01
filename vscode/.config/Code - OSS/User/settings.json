@@ -9,5 +9,6 @@
     "rest-client.decodeEscapedUnicodeCharacters": true,
     "rest-client.previewOption": "exchange",
     "rest-client.previewResponsePanelTakeFocus": false,
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "redhat.telemetry.enabled": false
 }
