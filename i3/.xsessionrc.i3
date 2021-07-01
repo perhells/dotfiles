@@ -17,7 +17,7 @@ echo "MONITOR=$MONITOR"
 echo "DPI=$DPI"
 
 runIfNotRunning () {
-  if pgrep $1; then
+  if pgrep $1 > /dev/null; then
     echo "Process \"$1\" is running, skipping!"
   else
     if which $1 2> /dev/null; then
@@ -104,7 +104,7 @@ if [ -f ~/.config/picom.conf ]; then
 fi
 
 # Dropbox
-if pgrep dropbox; then
+if pgrep dropbox > /dev/null; then
   echo "Process \"dropbox\" is running, skipping!"
 else
   if which dropbox 2> /dev/null; then
