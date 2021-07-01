@@ -201,7 +201,19 @@ function git-gone
 end
 
 # Remove branches that has been removed at origin
-function git-gone-clean; git branch -D (git-gone); end
+function git-gone-clean; git branch -d (git-gone) 2>/dev/null; end
+
+# List tags sorted by date
+function git-tags
+    for tag in (git tag -l)
+        echo (git show "$tag" --date=iso-local | grep Date: | sed -e "s/Date:\\s\+//g" | tail -n1) - $tag
+    end | sort
+end
+
+function git-tag-delete
+    git tag -d $argv
+    git push --delete origin $argv
+end
 
 # Get groups of LDAP user
 function ldapgroups
