@@ -20,26 +20,26 @@ else
 fi
 
 i3lock -i "$background_resized" -c '#000000' \
---insidevercolor=$B   \
---ringvercolor=$V     \
---insidewrongcolor=$C \
---ringwrongcolor=$W   \
+--insidever-color=$B   \
+--ringver-color=$V     \
+--insidewrong-color=$C \
+--ringwrong-color=$W   \
 \
---insidecolor=$B      \
---ringcolor=$C        \
---linecolor=$B        \
---separatorcolor=$C   \
+--inside-color=$B      \
+--ring-color=$C        \
+--line-color=$B        \
+--separator-color=$C   \
 \
---verifcolor=$D        \
---wrongcolor=$T        \
---timecolor=$T        \
---datecolor=$T        \
---layoutcolor=$T      \
---keyhlcolor=$D       \
---bshlcolor=$T        \
+--verif-color=$D        \
+--wrong-color=$T        \
+--time-color=$T        \
+--date-color=$T        \
+--layout-color=$T      \
+--keyhl-color=$D       \
+--bshl-color=$T        \
 \
 --screen 1            \
 --clock               \
 --indicator           \
---timestr="%H:%M:%S"  \
---datestr="%Y-%m-%d" || i3lock -c '#000000' # Simplified version if i3lock-color is not installed
+--time-str="%H:%M:%S"  \
+--date-str="%Y-%m-%d" || i3lock -c '#000000' # Simplified version if i3lock-color is not installed
