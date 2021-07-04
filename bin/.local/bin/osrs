@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-if optimus-manager --print-mode 2> /dev/null | grep hybrid; then
+if optimus-manager --print-mode 2> /dev/null | grep hybrid > /dev/null; then
     echo "[INFO] optimus-manager is running in hybrid mode"
     echo "[INFO] Running RuneLite with graphic switching"
     __NV_PRIME_RENDER_OFFLOAD=1 \
