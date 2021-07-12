@@ -110,6 +110,7 @@ format-underline = ${colors.primary}
 type = custom/script
 interval = 3
 exec = check_vpn
+format = %{A1:openfortigui:}%{A3:pulseUI:}<label>%{A}%{A}
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix-underline = ${colors.primary}

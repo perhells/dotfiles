@@ -16,6 +16,8 @@ if ifconfig 2> /dev/null | grep tun0 > /dev/null; then
 else
     if ifconfig 2> /dev/null | grep ppp0 > /dev/null; then
         echo "Internal VPN active"
+    else
+        echo "No VPN connected"
     fi
 fi
 
