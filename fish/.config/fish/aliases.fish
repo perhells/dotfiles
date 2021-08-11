@@ -202,6 +202,7 @@ end
 
 # Remove branches that has been removed at origin
 function git-gone-clean; git branch -d (git-gone) 2>/dev/null; end
+function git-gone-clean-force; git branch -D (git-gone) 2>/dev/null; end
 
 # List tags sorted by date
 function git-tags
