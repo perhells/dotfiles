@@ -20,6 +20,13 @@ function ...; cd (git rev-parse --show-toplevel); end
 # SSH
 function ssh-agent; eval (command ssh-agent -c); end
 
+function ssh
+    set originalTerm $TERM
+    export TERM=xterm
+    command ssh $argv
+    export TERM=$originalTerm
+end
+
 # Comfort
 function ll; command ls -lh --group-directories-first --color $argv; end
 function grep; command grep --color=auto $argv; end
