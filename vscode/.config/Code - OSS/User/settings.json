@@ -10,6 +10,21 @@
     "rest-client.previewOption": "exchange",
     "rest-client.previewResponsePanelTakeFocus": false,
     "editor.tabSize": 2,
-    "editor.rulers": [80, 120],
-    "redhat.telemetry.enabled": false
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "redhat.telemetry.enabled": false,
+    "yaml.customTags": [
+        "!Equals sequence",
+        "!FindInMap sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!Join sequence",
+        "!Ref",
+        "!Select sequence",
+        "!Split sequence",
+        "!Sub"
+    ]
 }
