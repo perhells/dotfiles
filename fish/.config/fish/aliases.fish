@@ -286,4 +286,4 @@ function figsay
     echo "$argv" | figlet | cowsay -n
 end
 
-function ipecho; curl https://ipecho.net/plain; end
+function ipecho; curl --silent https://ipecho.net/plain; echo; end
