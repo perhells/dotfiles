@@ -130,7 +130,7 @@ background = "#222222"
 foreground = "#ffffff"
 
 [Runelite]
-summary=RuneLite
+summary = RuneLite*
 background = "#222222"
 foreground = "#ffffff"
 timeout = 3
