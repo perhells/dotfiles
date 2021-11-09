@@ -25,6 +25,7 @@
         "!Ref",
         "!Select sequence",
         "!Split sequence",
-        "!Sub"
+        "!Sub",
+        "!If sequence"
     ]
 }
