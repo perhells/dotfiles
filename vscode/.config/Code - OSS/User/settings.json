@@ -26,6 +26,9 @@
         "!Select sequence",
         "!Split sequence",
         "!Sub",
-        "!If sequence"
+        "!If sequence",
+        "!Not sequence",
+        "!Condition sequence",
+        "!Or sequence"
     ]
 }
