@@ -75,8 +75,8 @@ end
 
 # Displays repository information if in a git folder
 function git_branch
-    set -l git_branches (git rev-parse --abbrev-ref HEAD ^/dev/null)
-    set -l git_status (git status --porcelain ^/dev/null)
+    set -l git_branches (git branch --color=never 2> /dev/null | sed -n '/\* /s///p')
+    set -l git_status (git status --porcelain  2> /dev/null)
     set -l infocolor 4ca4b5
     set -l delimcolor blue
     set -l pathcolor red
