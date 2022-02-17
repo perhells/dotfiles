@@ -20,6 +20,9 @@ floating_modifier $mod
 # Lock screen
 bindsym Ctrl+$alt+l exec --no-startup-id lockscreen.sh
 
+# Turn screen off
+bindsym Ctrl+$alt+q exec --no-startup-id blank
+
 # Shutdown
 bindsym $mod+Ctrl+q exec --no-startup-id shutdown now
 
@@ -177,8 +180,8 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="openfortiGUI"] floating enable
-for_window [class="PulseUi"] floating enable
-for_window [class="PulseUi"] resize set 1700 880
+for_window [class="PulseUI"] floating enable
+#for_window [class="PulseUI"] resize set 1700 880
 for_window [title="Friends List"] floating enable
 for_window [title="Steam - News"] floating enable
 for_window [class=".*"] move position center
