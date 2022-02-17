@@ -28,9 +28,9 @@
     df = diff --ws-error-highlight=all
     subdiff = diff --submodule=diff
 [merge]
-    conflictstyle = diff3
+    tool = mymeld
 [mergetool]
-    prompt = false
+    cmd = meld --diff $BASE $LOCAL --diff $BASE $REMOTE --diff $LOCAL $MERGED $REMOTE
 [user]
     email = per.hellstrom@knightec.se
     name = Per Hellström
