@@ -38,7 +38,7 @@ fixed-center = true
 monitor = ${env:MONITOR:eDP-1}
 monitor-strict = true
 
-tray-position = ${env:TRAY_POS}
+tray-position = ${env:TRAY_POS:none}
 
 background = ${colors.background}
 foreground = ${colors.foreground}
