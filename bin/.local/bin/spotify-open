@@ -5,7 +5,7 @@ if [ $# != "1" ]; then
     exit 1
 fi
 
-uri="$1"
+uri=$(echo $1 | sed -e 's/:\/\//\:/' | sed -e 's/\//:/' | sed -e 's/\?.*//')
 
 if pgrep spotify > /dev/null; then
     echo "Opening: $uri" | tee -a ~/.spotify-open.log
