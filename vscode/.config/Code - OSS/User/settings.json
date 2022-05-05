@@ -30,5 +30,21 @@
         "!Not sequence",
         "!Condition sequence",
         "!Or sequence"
+    ],
+    "cSpell.userWords": [
+        "adyen",
+        "APIGEE",
+        "ARVATO",
+        "backoff",
+        "Ciphertext",
+        "CLIENTID",
+        "dewire",
+        "imsi",
+        "PAASE",
+        "pcap",
+        "RDSDB",
+        "substatus",
+        "upsert",
+        "xlarge"
     ]
 }
