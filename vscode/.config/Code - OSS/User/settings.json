@@ -32,19 +32,30 @@
         "!Or sequence"
     ],
     "cSpell.userWords": [
+        "accesstoken",
         "adyen",
         "APIGEE",
         "ARVATO",
         "backoff",
         "Ciphertext",
         "CLIENTID",
+        "CPAY",
         "dewire",
         "imsi",
+        "knightec",
+        "mahi",
+        "mocharc",
+        "niro",
         "PAASE",
+        "paymentmethod",
         "pcap",
         "RDSDB",
         "substatus",
+        "tink",
+        "Trustly",
         "upsert",
+        "vipps",
+        "wiva",
         "xlarge"
     ]
 }
