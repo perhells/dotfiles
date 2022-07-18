@@ -181,6 +181,7 @@ for_window [class="Nm-connection-editor"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="openfortiGUI"] floating enable
 for_window [class="PulseUi"] floating enable
+for_window [class="PulseUI"] floating enable
 for_window [class="PulseUi"] resize set 1700 880
 for_window [title="Friends List"] floating enable
 for_window [title="Steam - News"] floating enable

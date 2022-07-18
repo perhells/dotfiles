@@ -3,12 +3,12 @@
 OPTIND=1
 DPI=144
 while getopts "d:m:" opt; do
-    case "$opt" in
+  case "$opt" in
     d)  DPI=$OPTARG
-        ;;
+      ;;
     m)  MONITOR=$OPTARG
-        ;;
-    esac
+      ;;
+  esac
 done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
@@ -45,12 +45,15 @@ xset r rate 250 50
 # Remove mouse acceleration
 xset m 0 0
 
-MOUSE_SPEED_REDUCTION=3
 if xinput list | grep "Mionix NAOS 8200" > /dev/null; then
-    # Reduce mouse speed if Mionix NAOS 8200 exists
-    MOUSE_ID=$(xinput list | grep "Mionix NAOS 8200.*pointer" | sed -e "s/.*id=\([0-9]\+\).*/\1/")
-    PROP_ID=$(xinput list-props $MOUSE_ID | grep "Coordinate Transformation Matrix" | sed -e "s/.*(\([0-9]\+\)):.*/\1/")
-    xinput set-prop "$MOUSE_ID" "$PROP_ID" 1 0 0 0 1 0 0 0 "$MOUSE_SPEED_REDUCTION"
+  # Reduce mouse speed if Mionix NAOS 8200 exists
+  MOUSE_ID=$(xinput list | grep "Mionix NAOS 8200.*pointer" | sed -e "s/.*id=\([0-9]\+\).*/\1/")
+  PROP_ID=$(xinput list-props $MOUSE_ID | grep "Coordinate Transformation Matrix" | sed -e "s/.*(\([0-9]\+\)):.*/\1/")
+  xinput set-prop "$MOUSE_ID" "$PROP_ID" 1 0 0 0 1 0 0 0 3
+fi
+
+if xinput list | grep "MOSART Semi. 2.4G Keyboard Mouse" > /dev/null; then
+  xinput set-prop "pointer:MOSART Semi. 2.4G Keyboard Mouse" "Coordinate Transformation Matrix" 1 0 0 0 1 0 0 0 3
 fi
 
 # Disable sleep
