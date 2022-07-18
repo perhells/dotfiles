@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+function usage {
+  echo
+  echo "Usage: $0 (phone|music|switch|status)"
+  exit 0
+}
+
+function status {
+  protocol=$(pacmd list-sinks | grep protocol | awk '{print $3}' | sed -e 's/"//g')
+  case "$protocol" in
+    handsfree_head_unit)
+      echo "HSP"
+      exit 0
+      ;;
+    a2dp_sink)
+      echo "A2DP"
+      exit 0
+      ;;
+    *)
+      echo "$protocol"
+      exit 0
+      ;;
+  esac
+  exit 0
+}
+
+function switch {
+  protocol=$(pacmd list-sinks | grep protocol | awk '{print $3}' | sed -e 's/"//g')
+  case "$protocol" in
+    handsfree_head_unit)
+      profilename="a2dp_sink"
+      ;;
+    a2dp_sink)
+      profilename="handsfree_head_unit"
+      ;;
+    *)
+      echo "$protocol is not a known protocol!"
+      exit 1
+      ;;
+  esac
+}
+
+case "$1" in
+  hsp)
+    profilename="handsfree_head_unit"
+    ;;
+  a2dp)
+    profilename="a2dp_sink"
+    ;;
+  switch)
+    switch
+    ;;
+  status)
+    status
+    ;;
+  *)
+    usage
+    ;;
+esac
+
+# Get Card and Device
+card_id=$(pacmd list-sinks | grep card: | awk '{print $2}')
+devicename=$(pacmd list-sinks | grep -o '<bluez_sink[^>]*' | cut -d\< -f2)
+
+#change the default sink
+echo pactl set-card-profile "$card_id" "$profilename"
+pactl set-card-profile "$card_id" "$profilename" || echo "Problem setting profile"; exit 3
+
+exit 0
+

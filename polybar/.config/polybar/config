@@ -63,7 +63,7 @@ font-5 = Font Awesome 6 Brands:size=10;2
 
 modules-left = i3
 modules-center = spotify
-modules-right = counter pulseaudio bluetooth-battery memory cpu temperature vpn wlan eth battery date
+modules-right = counter pulseaudio bluetooth-codec bluetooth-battery memory cpu temperature vpn wlan eth battery date
 
 tray-padding = 0
 
@@ -137,6 +137,16 @@ type = custom/script
 interval = 2
 exec = bl_battery.py 38:18:4C:59:88:19 10 2>/dev/null
 exec-if = dbus-send --system --dest=org.bluez --type=method_call --print-reply /org/bluez/hci0/dev_38_18_4C_59_88_19 org.freedesktop.DBus.Properties.Get string:org.bluez.Device1 string:Connected | grep "boolean true"
+format-foreground = ${colors.foreground}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary}
+
+[module/bluetooth-codec]
+type = custom/script
+interval = 1
+exec = bl_codec status
+format = %{A1:bl_codec switch:}<label>%{A}
 format-foreground = ${colors.foreground}
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
